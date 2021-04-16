@@ -1,0 +1,13 @@
+{
+    "name": "romain/ocp5",
+    "description": "Romain's Book",
+    "require": {
+        "twig/twig": "^3.3"
+    },
+    "authors": [
+        {
+            "name": "Romain Royer",
+            "email": "romain.royer@outlook.com"
+        }
+    ]
+}
