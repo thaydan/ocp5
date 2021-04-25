@@ -1,0 +1,17 @@
+{# /templates/home.html.twig #}
+{% extends 'parent.html.twig' %}
+
+{% block titre %}Accueil{% endblock%}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="produit.css" type="text/css" media="all" />
+{% endblock%}
+
+{% block contenuPrincipal %}
+    <h1>Romain Royer</h1>
+{% endblock %}
+
+{% block javascripts %}
+    {# <script src="build/produit.js" /> #}
+{% endblock %}

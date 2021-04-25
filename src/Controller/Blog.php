@@ -1,9 +1,9 @@
 <?php
 
-namespace Controller;
+namespace App\Controller;
 
-require_once '../Model/Post.php';
-require_once '../View/View.php';
+use App\Model\Post;
+use App\View\View;
 
 class Blog {
 

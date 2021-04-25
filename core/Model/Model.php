@@ -1,5 +1,7 @@
 <?php
 
+namespace Core\Model;
+
 abstract class Model {
 
   // Objet PDO d'accès à la BD

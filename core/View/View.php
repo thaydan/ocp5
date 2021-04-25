@@ -1,7 +1,5 @@
 <?php
 
-//require_once \Config::$site_version_root . '/View/Functions.php';
-
 class View {
 
   private $fichier;
