@@ -1,8 +1,11 @@
 <?php
 
 use Symfony\Component\Dotenv\Dotenv;
-use App\Router\Router;
+use Core\Router\Router;
 use App\Controller\Home;
+use App\Controller\Blog;
+use App\Controller\Post;
+use App\Controller\Contact;
 
 require '../vendor/autoload.php';
 
@@ -17,14 +20,14 @@ if (file_exists('../.env.local')) {
 $dotenv = new Dotenv();
 $dotenv->load(...$envFiles);
 
-//require '../Router.php';
-
 $router = new Router($_GET['url']);
 
-$router->get('/', (new Home())->show());
-$router->get('/blog', function (){ echo 'Tous les articles'; });
-$router->get('/blog/:slug', function ($id){ echo "Article $slug"; });
+$router->get('/', [new Home, 'show']);
+$router->get('/blog', [new Blog, 'show']);
+//$router->get('/blog/:slug',  [new Post, 'show']);
 $router->post('/blog/:id', function ($id){ echo "Poster pour l'article $id"; });
+
+$router->get('/contact', [new Contact(), 'show']);
 
 //$router->put();
 //$router->delete();

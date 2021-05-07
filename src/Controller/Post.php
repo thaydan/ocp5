@@ -1,27 +1,36 @@
 <?php
 
-namespace Controller;
+namespace App\Controller;
 
-require_once '../Model/Post.php';
-require_once '../View/View.php';
+use App\Model\Post;
+use App\View\View;
+use Core\Controller\AController;
 
-class Post {
+class Post extends AController
+{
 
-  private $post;
+    private $post;
 
-  public function __construct() {
-    $this->post = new \Model\Post();
-  }
+    public function __construct() {
+        $this->post = new \Model\Post();
+    }
 
-  public function show($slug) {
+    public function show($slug) {
 
-    $post = $this->post->getPost($slug);
+        //$post = $this->post->getPost($slug);
+        $post = '';
 
-    $head_title = $post['title'] . ' - Romain Royer';
+        $headTitle = $post['title'] . ' - Romain Royer';
 
-    $view = new \View("Post");
-    $view->render(array('head_title' => $head_title,
-                        'post' => $post
-                       ));
-  }
+
+        $this->render('post.html.twig', [
+            'headTitle' => $headTitle,
+            'post' => $post
+        ]);
+
+        /*$view = new \View("Post");
+        $view->render(array('head_title' => $head_title,
+            'post' => $post
+        ));*/
+    }
 }

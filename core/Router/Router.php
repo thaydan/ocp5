@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Router;
+namespace Core\Router;
 
 
 class Router {
@@ -24,7 +24,7 @@ class Router {
 
     private function add($path, $callable, $name, $method){
 
-        var_dump($callable);
+        //var_dump($callable);
         $route = new Route($path, $callable);
         $this->routes[$method][] = $route;
         if(is_string($callable) && $name === null){
@@ -45,7 +45,7 @@ class Router {
                 return $route->call();
             }
         }
-        throw new RouterException('No matching routes');
+        throw new Exception('No matching routes');
     }
 
     public function url($name, $params = []){

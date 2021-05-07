@@ -2,11 +2,10 @@
 
 namespace App\Controller;
 
-use App\Model\Post;
-use App\View\View;
 use Core\Controller\AController;
+use App\View\View;
 
-class Blog extends AController
+class Contact extends AController
 {
 
     private $post;
@@ -16,20 +15,15 @@ class Blog extends AController
     }
 
     public function show() {
-
         $headTitle = 'Blog - Romain Royer';
 
         //$posts = $this->post->getPosts();
 
         $posts = '';
 
-        $this->render('blog.html.twig', [
+        $this->render('contact.html.twig', [
             'headTitle' => $headTitle,
             'posts' => $posts
         ]);
-
-        /*$view = new \View("Blog");
-        $view->render(array('head_title' => $head_title
-        ));*/
     }
 }

@@ -1,10 +1,11 @@
 <?php
 
-namespace Model;
+namespace App\Model;
 
-require_once '../Model/Model.php';
+use Core\Model\Model;
 
-class Post extends \Model {
+class Post extends Model
+{
 
     public function getPosts () {
         $sql = 'SELECT *

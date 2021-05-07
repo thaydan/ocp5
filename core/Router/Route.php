@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Router;
+namespace Core\Router;
 
 
 class Route {
@@ -35,6 +35,7 @@ class Route {
     public function call(){
         if(is_string($this->callable)){
             $params = explode('#', $this->callable);
+            var_dump($this->callable);
             $controller = "App\\Controller\\" . $params[0] . "Controller";
             $controller = new $controller();
             return call_user_func_array([$controller, $params[1]], $this->matches);
