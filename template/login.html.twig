@@ -1,4 +1,4 @@
-{# /templates/contact.html.twig #}
+{# /templates/login.html.twig #}
 {% extends 'parent.html.twig' %}
 
 {% block titre %}Contact{% endblock%}
@@ -14,7 +14,7 @@
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
             <!-- Masthead Heading-->
-            <h1 class="masthead-heading text-uppercase mb-0">Contact</h1>
+            <h1 class="masthead-heading text-uppercase mb-0">Accès limité</h1>
             <!-- Icon Divider-->
             <div class="divider-custom divider-light">
                 <div class="divider-custom-line"></div>
@@ -22,7 +22,7 @@
                 <div class="divider-custom-line"></div>
             </div>
             <!-- Masthead Subheading-->
-            <p class="masthead-subheading font-weight-light mb-0">Vous avez besoin d'un renseignement ou d'un devis ? C'est par ici !</p>
+            <p class="masthead-subheading font-weight-light mb-0">Veuillez vous identifier</p>
         </div>
     </header>
 
@@ -36,35 +36,21 @@
                     <form id="contactForm" name="sentMessage" novalidate="novalidate">
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                <label>Nom</label>
-                                <input class="form-control" id="name" type="text" placeholder="Nom" required="required" data-validation-required-message="Please enter your name." />
+                                <label>Identifiant</label>
+                                <input class="form-control" id="id" type="text" placeholder="Identifiant" required="required" data-validation-required-message="Please enter your name." />
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <div class="control-group">
                             <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                <label>Adresse mail</label>
-                                <input class="form-control" id="email" type="email" placeholder="Adresse mail" required="required" data-validation-required-message="Please enter your email address." />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                <label>Téléphone</label>
-                                <input class="form-control" id="phone" type="tel" placeholder="Téléphone" required="required" data-validation-required-message="Please enter your phone number." />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                <label>Message</label>
-                                <textarea class="form-control" id="message" rows="5" placeholder="Message" required="required" data-validation-required-message="Please enter a message."></textarea>
+                                <label>Mot de passe</label>
+                                <input class="form-control" id="password" type="email" placeholder="Mot de passe" required="required" data-validation-required-message="Please enter your email address." />
                                 <p class="help-block text-danger"></p>
                             </div>
                         </div>
                         <br />
                         <div id="success"></div>
-                        <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">Envoyer</button></div>
+                        <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">S'identifier</button></div>
                     </form>
                 </div>
             </div>

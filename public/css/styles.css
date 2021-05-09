@@ -3891,6 +3891,14 @@ input[type=button].btn-block {
   display: block;
   padding: 0.5rem 1rem;
 }
+.nav-link img {
+  height: 42px;
+  margin: -40px -40px -40px 0;
+}
+.nav-link img:hover, .nav-link img:focus {
+  box-shadow: 0 0 0px 3px #1abc9c;
+  border-radius: 50%;
+}
 .nav-link:hover, .nav-link:focus {
   text-decoration: none;
 }

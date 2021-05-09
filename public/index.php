@@ -1,5 +1,6 @@
 <?php
 
+use App\Controller\Login;
 use Symfony\Component\Dotenv\Dotenv;
 use Core\Router\Router;
 use App\Controller\Home;
@@ -15,8 +16,6 @@ if (file_exists('../.env.local')) {
     $envFiles[] = '../.env.local';
 }
 
-//var_dump($envFiles);
-
 $dotenv = new Dotenv();
 $dotenv->load(...$envFiles);
 
@@ -27,7 +26,8 @@ $router->get('/blog', [new Blog, 'show']);
 //$router->get('/blog/:slug',  [new Post, 'show']);
 $router->post('/blog/:id', function ($id){ echo "Poster pour l'article $id"; });
 
-$router->get('/contact', [new Contact(), 'show']);
+$router->get('/contact', [new Contact, 'show']);
+$router->get('/login', [new Login, 'login']);
 
 //$router->put();
 //$router->delete();
