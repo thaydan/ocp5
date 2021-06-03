@@ -16,5 +16,8 @@
             "name": "Romain Royer",
             "email": "romain.royer@outlook.com"
         }
-    ]
+    ],
+    "require-dev": {
+        "symfony/var-dumper": "^5.2"
+    }
 }

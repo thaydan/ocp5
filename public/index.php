@@ -1,12 +1,13 @@
 <?php
 
-use App\Controller\Login;
 use Symfony\Component\Dotenv\Dotenv;
 use Core\Router\Router;
-use App\Controller\Home;
-use App\Controller\Blog;
-use App\Controller\Post;
-use App\Controller\Contact;
+use App\Controller\HomeController;
+use App\Controller\BlogController;
+use App\Controller\PostController;
+use App\Controller\ContactController;
+use App\Controller\LoginController;
+use App\Controller\ProfileController;
 
 require '../vendor/autoload.php';
 
@@ -19,15 +20,22 @@ if (file_exists('../.env.local')) {
 $dotenv = new Dotenv();
 $dotenv->load(...$envFiles);
 
+session_start();
+
 $router = new Router($_GET['url']);
 
-$router->get('/', [new Home, 'show']);
-$router->get('/blog', [new Blog, 'show']);
-//$router->get('/blog/:slug',  [new Post, 'show']);
-$router->post('/blog/:id', function ($id){ echo "Poster pour l'article $id"; });
+$router->get('/', [new HomeController, 'show']);
+$router->get('/blog', [new BlogController, 'show']);
+$router->get('/blog/:slug',  [new PostController, 'show']);
+//$router->post('/blog/:id', function ($id){ echo "Poster pour l'article $id"; });
 
-$router->get('/contact', [new Contact, 'show']);
-$router->get('/login', [new Login, 'login']);
+$router->get('/contact', [new ContactController, 'show']);
+$router->get('/login', [new LoginController, 'login']);
+$router->post('/login', [new LoginController, 'login']);
+
+// if logged
+$router->get('/profile', [new ProfileController, 'show']);
+// end if logged
 
 //$router->put();
 //$router->delete();

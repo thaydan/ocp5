@@ -1,6 +1,6 @@
 <?php
 
-namespace Core\Model;
+namespace Core\Entity;
 
 abstract class AModel {
 
@@ -15,19 +15,7 @@ abstract class AModel {
       $result->execute($params);
     }
 
-    return $this->fetch($result);
-  }
-
-  private function fetch($object)
-  {
-      if ($object->rowCount() == 1) {
-          echo 1;
-          return $object->fetch();
-      }
-      else {
-          echo 'plusieurs';
-          return $object->fetchAll();
-      }
+    return $result->fetchAll();
   }
 
   /*protected function getLastInsertId()

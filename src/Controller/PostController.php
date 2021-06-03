@@ -2,23 +2,21 @@
 
 namespace App\Controller;
 
-use App\Model\Post;
-use App\View\View;
 use Core\Controller\AController;
+use App\Entity\Post;
 
-class Post extends AController
+class PostController extends AController
 {
 
     private $post;
 
     public function __construct() {
-        $this->post = new \Model\Post();
+        $this->post = new Post();
     }
 
     public function show($slug) {
 
-        //$post = $this->post->getPost($slug);
-        $post = '';
+        $post = $this->post->getPost($slug)[0];
 
         $headTitle = $post['title'] . ' - Romain Royer';
 
@@ -27,10 +25,5 @@ class Post extends AController
             'headTitle' => $headTitle,
             'post' => $post
         ]);
-
-        /*$view = new \View("Post");
-        $view->render(array('head_title' => $head_title,
-            'post' => $post
-        ));*/
     }
 }

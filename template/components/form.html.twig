@@ -1,0 +1,9 @@
+<form id="{{ form.id }}">
+    {% for name,field in form.fields %}
+        {% include 'components/form-types.html.twig' with {'type': field.type} %}
+        <li>{{ errorMessage }}</li>
+    {% endfor %}
+    <br />
+    <div id="success"></div>
+    <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">S'identifier</button></div>
+</form>

@@ -4,20 +4,17 @@ namespace App\Controller;
 
 use Core\Controller\AController;
 
-class Home extends AController
+class HomeController extends AController
 {
 
     public function show()
     {
 
-        $posts = $this->sql('select * from posts');
-
-        //var_dump($posts);
+        //$posts = $this->;
         $headTitle = 'Romain Royer';
 
         $this->render('home.html.twig', [
-            'headTitle' => $headTitle,
-            'posts' => $posts
+            'headTitle' => $headTitle
         ]);
 
     }

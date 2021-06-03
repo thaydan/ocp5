@@ -1,8 +1,6 @@
 {# /templates/login.html.twig #}
 {% extends 'parent.html.twig' %}
 
-{% block titre %}Contact{% endblock%}
-
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="produit.css" type="text/css" media="all" />
@@ -32,26 +30,9 @@
             <!-- Contact Section Form-->
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
-                    <form id="contactForm" name="sentMessage" novalidate="novalidate">
-                        <div class="control-group">
-                            <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                <label>Identifiant</label>
-                                <input class="form-control" id="id" type="text" placeholder="Identifiant" required="required" data-validation-required-message="Please enter your name." />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                <label>Mot de passe</label>
-                                <input class="form-control" id="password" type="email" placeholder="Mot de passe" required="required" data-validation-required-message="Please enter your email address." />
-                                <p class="help-block text-danger"></p>
-                            </div>
-                        </div>
-                        <br />
-                        <div id="success"></div>
-                        <div class="form-group"><button class="btn btn-primary btn-xl" id="sendMessageButton" type="submit">S'identifier</button></div>
-                    </form>
+{#                    {{ dump(formContact) }}#}
+                    {{ form(formLogin) }}
+{#                    {% include 'components/form.html.twig' with form %}#}
                 </div>
             </div>
         </div>
