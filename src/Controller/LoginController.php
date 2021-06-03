@@ -48,30 +48,6 @@ class LoginController extends AController
             ]
         );
 
-        /*$formContact = new Form(
-            [
-                'username' => new TextType(
-                    [
-                        new NotNullConstraint(),
-                        new NotBlankConstraint()
-                    ],
-                    [
-                        'label' => 'Nom d\'utilisateur'
-                    ]
-                ),
-                'content' => new TextAreaType(
-                    [
-                        new NotNullConstraint(),
-                        new NotBlankConstraint()
-                    ],
-                    [
-                        'label' => 'Contenu'
-                    ]
-                ),
-                'submit' => new SubmitType()
-            ]
-        );*/
-
         $formLogin->handleRequest();
 
         if ($formLogin->isSubmitted() && $formLogin->isValid()) {
@@ -82,11 +58,10 @@ class LoginController extends AController
             //dump(Auth::isConnected(), Auth::getUser());
         }
 
-        // if identifiant ok
-        // do login
-        // then redirect
-        // verification des champs
-        // if not login, show again login page with error message
+        if (Auth::isConnected()) {
+            header('Location: /dashboard');
+            exit;
+        }
 
         $headTitle = 'Login - Romain Royer';
 

@@ -1,5 +1,7 @@
 <?php
 
+use App\Controller\DashboardController;
+use App\Controller\LogoutController;
 use Symfony\Component\Dotenv\Dotenv;
 use Core\Router\Router;
 use App\Controller\HomeController;
@@ -32,9 +34,11 @@ $router->get('/blog/:slug',  [new PostController, 'show']);
 $router->get('/contact', [new ContactController, 'show']);
 $router->get('/login', [new LoginController, 'login']);
 $router->post('/login', [new LoginController, 'login']);
+$router->get('/logout', [new LogoutController, 'logout']);
 
 // if logged
 $router->get('/profile', [new ProfileController, 'show']);
+$router->get('/dashboard', [new DashboardController, 'dashboard']);
 // end if logged
 
 //$router->put();

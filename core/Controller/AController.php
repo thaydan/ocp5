@@ -3,6 +3,7 @@
 namespace Core\Controller;
 
 use Core\Form\Form;
+use Core\Security\Auth;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFunction;
@@ -18,6 +19,8 @@ abstract class AController
 
     protected function render(string $name, array $context = []): void
     {
+        $context['connected'] = Auth::isConnected();
+
         $loader = new FilesystemLoader(['../template', '../core/Template']);
         $twig = new Environment(
             $loader,
