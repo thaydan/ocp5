@@ -28,9 +28,6 @@ session_start();
 $router = new Router($_GET['url']);
 
 $router->get('/', [new HomeController, 'show']);
-$router->get('/blog', [new BlogController, 'show']);
-$router->get('/blog/:slug',  [new PostController, 'show']);
-//$router->post('/blog/:id', function ($id){ echo "Poster pour l'article $id"; });
 
 $router->get('/contact', [new ContactController, 'show']);
 $router->get('/login', [new LoginController, 'login']);
@@ -46,6 +43,11 @@ $router->post('/blog/edit-post',  [new EditPostController, 'edit']);
 $router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit']);
 //$router->get('/edit-post/:id', [new DashboardController, 'dashboard']);
 // end if logged
+
+
+$router->get('/blog', [new BlogController, 'show']);
+$router->get('/blog/:slug',  [new PostController, 'show']);
+//$router->post('/blog/:id', function ($id){ echo "Poster pour l'article $id"; });
 
 //$router->put();
 //$router->delete();

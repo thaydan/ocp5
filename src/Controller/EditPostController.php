@@ -16,12 +16,17 @@ class EditPostController extends AController
 
     public function edit($slug = null) {
 
+        $post = [
+            'title' => 'Nouvel article',
+            'desc' => 'Description du nouvel article',
+            'content' => 'Contenu du nouvel article'
+        ];
+
         if($slug) {
             $post = $this->post->getPost($slug)[0];
         }
 
         $headTitle = $post['title'] . ' - Romain Royer';
-
 
         $this->render('edit-post.html.twig', [
             'headTitle' => $headTitle,

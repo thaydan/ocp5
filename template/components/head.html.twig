@@ -1,0 +1,73 @@
+<meta charset="UTF-8">
+<title>{{ headTitle }}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="description" content="" />
+<meta name="author" content="" />
+<link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico" />
+<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+<link href="/css/styles.css" rel="stylesheet" />
+
+<script src="https://cdn.tiny.cloud/1/cr2ue2keuieny7quppsnrte6af6dzuyaohw1wepi4ln79uq8/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
+<style>
+    .mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before {
+        position: relative!important;
+        width: max-content;
+        -webkit-transform-origin-x: center;
+    }
+</style>
+<script>
+    var dfreeTitleConfig = {
+        selector: '.dfree-title',
+        placeholder: "Ajouter un titre",
+        menubar: false,
+        inline: true,
+        toolbar: false,
+        plugins: [ 'quickbars' ],
+        quickbars_insert_toolbar: 'undo redo',
+        quickbars_selection_toolbar: 'italic underline',
+    };
+
+    var dfreeDescConfig = {
+        selector: '.dfree-desc',
+        placeholder: "Ajouter une description",
+        menubar: false,
+        inline: true,
+        toolbar: false,
+        plugins: [ 'quickbars' ],
+        quickbars_insert_toolbar: 'undo redo',
+        quickbars_selection_toolbar: 'italic underline',
+    };
+
+    var dfreeContentConfig = {
+        selector: '.dfree-content',
+        placeholder: "Ajouter du contenu",
+        menubar: false,
+        inline: true,
+        plugins: [
+            'autolink',
+            'codesample',
+            'link',
+            'lists',
+            'media',
+            'powerpaste',
+            'table',
+            'image',
+            'quickbars',
+            'codesample',
+            'help'
+        ],
+        toolbar: false,
+        quickbars_insert_toolbar: 'quicktable image media codesample',
+        quickbars_selection_toolbar: 'bold italic underline | formatselect | blockquote quicklink',
+        contextmenu: 'undo redo | inserttable | cell row column deletetable | help',
+        powerpaste_word_import: 'clean',
+        powerpaste_html_import: 'clean',
+    };
+
+    tinymce.init(dfreeTitleConfig);
+    tinymce.init(dfreeDescConfig);
+    tinymce.init(dfreeContentConfig);
+</script>
