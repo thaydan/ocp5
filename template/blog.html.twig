@@ -1,5 +1,5 @@
 {# /templates/blog.html.twig #}
-{% extends 'parent.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -28,6 +28,13 @@
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
+
+            {% if app.connected %}
+                <p>
+                    <a href="/blog/edit-post">Nouvel article</a>
+                </p>
+            {% endif %}
+
             <!-- Portfolio Section Heading-->
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Articles récents</h2>
             <!-- Icon Divider-->

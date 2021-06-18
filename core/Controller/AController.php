@@ -19,8 +19,6 @@ abstract class AController
 
     protected function render(string $name, array $context = []): void
     {
-        $context['connected'] = Auth::isConnected();
-
         $loader = new FilesystemLoader(['../template', '../core/Template']);
         $twig = new Environment(
             $loader,
@@ -28,6 +26,11 @@ abstract class AController
                 'cache' => ($_SERVER['APP_ENV'] === 'prod') ? '../var/cache/twig' : false,
             ]
         );
+
+        $twig->addGlobal('app', [
+            'connected' => Auth::isConnected(),
+            'user' => Auth::getUser()
+        ]);
 
         $twig->addFunction(
             new TwigFunction(

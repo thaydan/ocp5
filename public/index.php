@@ -7,6 +7,7 @@ use Core\Router\Router;
 use App\Controller\HomeController;
 use App\Controller\BlogController;
 use App\Controller\PostController;
+use App\Controller\EditPostController;
 use App\Controller\ContactController;
 use App\Controller\LoginController;
 use App\Controller\ProfileController;
@@ -39,6 +40,11 @@ $router->get('/logout', [new LogoutController, 'logout']);
 // if logged
 $router->get('/profile', [new ProfileController, 'show']);
 $router->get('/dashboard', [new DashboardController, 'dashboard']);
+$router->get('/blog/edit-post',  [new EditPostController, 'edit']);
+$router->get('/blog/edit-post/:slug',  [new EditPostController, 'edit']);
+$router->post('/blog/edit-post',  [new EditPostController, 'edit']);
+$router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit']);
+//$router->get('/edit-post/:id', [new DashboardController, 'dashboard']);
 // end if logged
 
 //$router->put();
