@@ -1,11 +1,6 @@
 {# /templates/post.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="produit.css" type="text/css" media="all" />
-{% endblock%}
-
 {% block contenuPrincipal %}
 
     <!-- Masthead-->
@@ -24,23 +19,23 @@
         </div>
     </header>
 
+    <div class="container-fluid bg-info p-4 text-white d-flex justify-content-center">
+        <div class="container">
+            Test
+        </div>
+    </div>
 
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
             {% if app.connected %}
                 <p>
-                    <a href="/blog/edit-post/{{ post.slug }}">Sauvegarder</a>
+                    <a class="btn btn-outline-primary bt" href="/blog/edit-post/{{ post.slug }}">Sauvegarder</a>
                 </p>
             {% endif %}
             <div class="dfree-content">
-                {{ post.content }}
+                {{ post.content|raw }}
             </div>
         </div>
     </section>
-
-{% endblock %}
-
-{% block javascripts %}
-    {# <script src="build/produit.js" /> #}
 {% endblock %}

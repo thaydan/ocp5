@@ -35,7 +35,7 @@
                     <a href="/blog/edit-post/{{ post.slug }}">Supprimer</a>
                 </p>
             {% endif %}
-            {{ post.content }}
+            {{ post.content|raw }}
         </div>
     </section>
 

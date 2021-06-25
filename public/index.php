@@ -32,6 +32,7 @@ $router->get('/', [new HomeController, 'show']);
 $router->get('/contact', [new ContactController, 'show']);
 $router->get('/login', [new LoginController, 'login']);
 $router->post('/login', [new LoginController, 'login']);
+$router->post('/festival', [new LoginController, 'login']);
 $router->get('/logout', [new LogoutController, 'logout']);
 
 // if logged
