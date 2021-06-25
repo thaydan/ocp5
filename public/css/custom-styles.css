@@ -1,3 +1,7 @@
 .bg-grey {
     background-color: grey;
 }
+
+.material-icons-outlined {
+    vertical-align: inherit;
+}

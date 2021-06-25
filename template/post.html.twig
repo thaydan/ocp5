@@ -25,16 +25,20 @@
     </header>
 
 
+
+    {% if app.connected %}
+        <div class="container-fluid bg-info p-4 text-white">
+            <div class="container d-flex align-items-center">
+                <span class="font-weight-bold">Mode administrateur</span>
+                <div class="ml-auto"><a class="btn btn-outline-light border-0" href="/blog/edit-post/{{ post.slug }}"><i class="material-icons-outlined">edit</i></a></div>
+            </div>
+        </div>
+    {% endif %}
+
+
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
-            {% if app.connected %}
-                <p>
-                    <a href="/blog/edit-post/{{ post.slug }}">Editer</a>
-                    <span> - </span>
-                    <a href="/blog/edit-post/{{ post.slug }}">Supprimer</a>
-                </p>
-            {% endif %}
             {{ post.content|raw }}
         </div>
     </section>

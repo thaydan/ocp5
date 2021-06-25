@@ -1,48 +1,37 @@
 {# /templates/blog.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="produit.css" type="text/css" media="all" />
-{% endblock%}
-
 {% block contenuPrincipal %}
 
     <!-- Masthead-->
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
             <!-- Masthead Heading-->
-            <h1 class="masthead-heading text-uppercase mb-0">Blog</h1>
-            <!-- Icon Divider-->
-            <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
+            <h1 class="masthead-heading text-uppercase">Blog</h1>
             <!-- Masthead Subheading-->
-            <p class="masthead-subheading font-weight-light mb-0">Retrouvez mes dernières actualités</p>
+            <p class="masthead-subheading font-weight-light mt-4 mb-0">Retrouvez mes dernières actualités</p>
         </div>
     </header>
+
+
+
+    {% if app.connected %}
+        <div class="container-fluid bg-info p-4 text-white">
+            <div class="container d-flex align-items-center">
+                <span class="font-weight-bold">Mode administrateur</span>
+                <div class="ml-auto"><a class="btn btn-outline-light border-0" href="/blog/edit-post"><i class="material-icons-outlined">add</i></a></div>
+            </div>
+        </div>
+    {% endif %}
+
 
 
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
 
-            {% if app.connected %}
-                <p>
-                    <a href="/blog/edit-post">Nouvel article</a>
-                </p>
-            {% endif %}
-
             <!-- Portfolio Section Heading-->
-            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Articles récents</h2>
-            <!-- Icon Divider-->
-            <div class="divider-custom">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-5">Articles récents</h2>
             <!-- Portfolio Grid Items-->
             <div class="row justify-content-center">
                 {% for post in posts %}
