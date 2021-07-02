@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\PostRepository;
 use Core\Controller\AController;
 use App\Entity\Post;
 
@@ -22,11 +23,13 @@ class EditPostController extends AController
             'content' => 'Contenu du nouvel article'
         ];
 
-        if($slug) {
-            $post = $this->post->getPost($slug)[0];
-        }
+        $headTitle = 'Nouvel article - Romain Royer';
 
-        $headTitle = $post['title'] . ' - Romain Royer';
+        if($slug) {
+            $postRepository = new PostRepository();
+            $post = $postRepository->findOneBy(['slug' => $slug]);
+            $headTitle = $post->title . ' - Romain Royer';
+        }
 
         $this->render('edit-post.html.twig', [
             'headTitle' => $headTitle,

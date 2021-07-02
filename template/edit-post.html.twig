@@ -1,10 +1,20 @@
-{# /templates/post.html.twig #}
 {% extends 'base.html.twig' %}
+
+{% set adminHeader %}
+    <span><a class="btn btn-outline-light border-0" href="/blog/{{ post.slug }}"><i class="fas fa-arrow-left"></i></a></span>
+    <span class="font-weight-bold ml-4">Edition du post</span>
+    <div class="ml-auto"><a class="btn btn-outline-light border-0" href="/blog/edit-post/{{ post.slug }}"><i class="material-icons-outlined">done</i></a></div>
+    <div class="ml-1"><a class="btn btn-outline-light border-0" href="/blog/edit-post/{{ post.slug }}"><i class="material-icons-outlined">delete</i></a></div>
+{% endset %}
 
 {% block contenuPrincipal %}
 
+    {% if app.connected %}
+        {% set adminHeaderDisplayedClass = 'admin-header-displayed' %}
+    {% endif %}
+
     <!-- Masthead-->
-    <header class="masthead bg-primary text-white text-center">
+    <header class="masthead {{ adminHeaderDisplayedClass }} bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
             <!-- Masthead Heading-->
             <h1 class="dfree-title masthead-heading text-uppercase mb-0">{{ post.title }}</h1>
@@ -18,17 +28,6 @@
             <p class="dfree-desc masthead-subheading font-weight-light mb-0">{{ post.desc }}</p>
         </div>
     </header>
-
-    {% if app.connected %}
-    <div class="container-fluid bg-info p-4 text-white">
-        <div class="container d-flex align-items-center">
-            <span><a class="btn btn-outline-light border-0" href="/blog/{{ post.slug }}"><i class="fas fa-arrow-left"></i></a></span>
-            <span class="font-weight-bold ml-4">Edition du post</span>
-            <div class="ml-auto"><a class="btn btn-outline-light border-0" href="/blog/edit-post/{{ post.slug }}"><i class="material-icons-outlined">done</i></a></div>
-            <div class="ml-1"><a class="btn btn-outline-light border-0" href="/blog/edit-post/{{ post.slug }}"><i class="material-icons-outlined">delete</i></a></div>
-        </div>
-    </div>
-    {% endif %}
 
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">

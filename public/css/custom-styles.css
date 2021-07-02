@@ -5,3 +5,30 @@
 .material-icons-outlined {
     vertical-align: inherit;
 }
+
+#mainNav img.profile {
+    margin: -40px -20px -40px 0;
+}
+
+#adminNav {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+#adminNav.navbar-shrink {
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+@media (min-width: 992px) {
+    .masthead.admin-header-displayed {
+        padding-top: calc(6rem + 104px + 80px);
+        padding-bottom: 6rem;
+    }
+
+    .masthead.admin-header-displayed {
+        padding-top: calc(6rem + 74px + 80px);
+        padding-bottom: 6rem;
+    }
+}
+

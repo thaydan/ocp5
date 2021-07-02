@@ -2,23 +2,17 @@
 
 namespace App\Controller;
 
+use App\Repository\PostRepository;
 use Core\Controller\AController;
-use App\Entity\Post;
 
 class PostController extends AController
 {
-
-    private $post;
-
-    public function __construct() {
-        $this->post = new Post();
-    }
-
     public function show($slug) {
 
-        $post = $this->post->getPost($slug)[0];
+        $postRepository = new PostRepository();
+        $post = $postRepository->findOneBy(['slug' => $slug]);
 
-        $headTitle = $post['title'] . ' - Romain Royer';
+        $headTitle = $post->title . ' - Romain Royer';
 
 
         $this->render('post.html.twig', [

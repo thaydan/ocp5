@@ -6,7 +6,15 @@
 </head>
 <body id="page-top">
 
-{% include 'components/header.html.twig' %}
+{% include 'components/header.html.twig' with {'adminHeader': adminHeader} %}
+
+{#{% if app.connected %}
+    <div class="container-fluid bg-info p-4 text-white">
+        <div class="container d-flex align-items-center">
+            {% block adminHeader %}{% endblock %}
+        </div>
+    </div>
+{% endif %}#}
 
 {% block contenuPrincipal %}
     Contenu du body
@@ -22,7 +30,7 @@
 <!-- Third party plugin JS-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 <!-- Core theme JS-->
-<script src="js/scripts.js"></script>
+<script src="/js/scripts.js"></script>
 
 </body>
 </html>

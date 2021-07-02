@@ -1,19 +1,29 @@
 <?php
 
+
 namespace App\Entity;
 
-use Core\Entity\AModel;
 
-class Post extends AModel
+class Post
 {
+    private ?string $posts;
+    private ?string $post;
 
-    public function getPosts () {
-        return $this->sql('SELECT * FROM posts');
+    /**
+     * @return string|null
+     */
+    public function getPosts(): ?string
+    {
+        return $this->posts;
     }
 
-    public function getPost($slug) {
-        $params = ['slug' => $slug];
-        return $this->sql('SELECT * FROM posts WHERE slug = :slug', $params);
+    public function getPost(): ?string
+    {
+        return $this->post;
     }
 
+    public function sanitize(): void
+    {
+        $this->password = null;
+    }
 }

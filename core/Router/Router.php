@@ -14,15 +14,15 @@ class Router {
         $this->url = $url;
     }
 
-    public function get($path, $callable, $name = null){
-        return $this->add($path, $callable, $name, 'GET');
+    public function get($path, $callable, $name = null, $needAuthentication = false){
+        return $this->add($path, $callable, $name, 'GET', $needAuthentication);
     }
 
-    public function post($path, $callable, $name = null){
-        return $this->add($path, $callable, $name, 'POST');
+    public function post($path, $callable, $name = null, $needAuthentication = false){
+        return $this->add($path, $callable, $name, 'POST', $needAuthentication);
     }
 
-    private function add($path, $callable, $name, $method){
+    private function add($path, $callable, $name, $method, $needAuthentication = false){
 
         //var_dump($callable);
         $route = new Route($path, $callable);
