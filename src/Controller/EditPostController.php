@@ -25,11 +25,18 @@ class EditPostController extends AController
 
         $headTitle = 'Nouvel article - Romain Royer';
 
+        $postRepository = new PostRepository();
+        if ($_POST) {
+            $post = $postRepository->edit($slug, $_POST);
+        }
+
         if($slug) {
-            $postRepository = new PostRepository();
             $post = $postRepository->findOneBy(['slug' => $slug]);
             $headTitle = $post->title . ' - Romain Royer';
         }
+
+        //$formLogin->handleRequest();
+
 
         $this->render('edit-post.html.twig', [
             'headTitle' => $headTitle,

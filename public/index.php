@@ -37,9 +37,9 @@ $router->get('/logout', [new LogoutController, 'logout']);
 
 // if logged
 $router->get('/profile', [new ProfileController, 'show']);
-$router->get('/dashboard', [new DashboardController, 'dashboard']);
 $router->get('/blog/edit-post',  [new EditPostController, 'edit']);
 $router->get('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'edit_post', );
+$router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'edit_post', );
 $router->post('/blog/edit-post',  [new EditPostController, 'edit']);
 $router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit']);
 //$router->get('/edit-post/:id', [new DashboardController, 'dashboard']);

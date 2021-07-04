@@ -1,16 +1,13 @@
 <?php
 
-
 namespace App\Controller;
 
 use Core\Controller\AController;
 use Core\Form\Constraint\NotBlankConstraint;
 use Core\Form\Constraint\NotNullConstraint;
 use Core\Form\Form;
-use Core\Form\Type\AFormType;
 use Core\Form\Type\PasswordType;
 use Core\Form\Type\SubmitType;
-use Core\Form\Type\TextAreaType;
 use Core\Form\Type\TextType;
 use Core\Security\Auth;
 
@@ -55,11 +52,10 @@ class LoginController extends AController
                 $datas = $formLogin->getData();
             }
             Auth::login($datas['id'], $datas['password']);
-            //dump(Auth::isConnected(), Auth::getUser());
         }
 
         if (Auth::isConnected()) {
-            header('Location: /dashboard');
+            header('Location: /blog');
             exit;
         }
 

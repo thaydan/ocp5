@@ -38,7 +38,7 @@ abstract class ARepository
     public function findBy(array $filters): array
     {
         return Database::getInstance()->query(
-            $this->createQueryWithFilters($filters),
+            $this->createSelectQueryWithFilters($filters),
             $filters,
             $this->getEntityClassName()
         );
@@ -47,8 +47,22 @@ abstract class ARepository
     public function findOneBy(array $filters)
     {
         return Database::getInstance()->query(
-            $this->createQueryWithFilters($filters),
+            $this->createSelectQueryWithFilters($filters),
             $filters,
+            $this->getEntityClassName(),
+            true
+        );
+    }
+
+    public function edit(string $slug, array $datas)
+    {
+        $allDatas = $datas;
+        $allDatas['slug'] = $slug;
+        var_dump($allDatas);
+        var_dump('UPDATE ' . $this->getTableName() . ' SET ' . $this->createUpdateQueryWithDatas($datas) . ' WHERE slug=:slug');
+        return Database::getInstance()->query(
+            'UPDATE ' . $this->getTableName() . ' SET ' . $this->createUpdateQueryWithDatas($datas) . ' WHERE slug=:slug',
+            $allDatas,
             $this->getEntityClassName(),
             true
         );
@@ -58,7 +72,7 @@ abstract class ARepository
      * @param array $filters
      * @return string
      */
-    private function createQueryWithFilters(array $filters): string
+    private function createSelectQueryWithFilters(array $filters): string
     {
         return 'SELECT * FROM ' . $this->getTableName() . ' WHERE ' . join(
                 ' AND ',
@@ -67,6 +81,22 @@ abstract class ARepository
                         return $this->toSnakeCase($key) . ' = :' . $key;
                     },
                     array_keys($filters)
+                )
+            );
+    }
+
+    /**
+     * @param array $filters
+     * @return string
+     */
+    private function createUpdateQueryWithDatas(array $datas): string
+    {
+        return join(', ',
+                array_map(
+                    function ($key) {
+                        return $this->toSnakeCase($key) . ' = :' . $key;
+                    },
+                    array_keys($datas)
                 )
             );
     }

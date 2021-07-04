@@ -3,7 +3,7 @@
 {% set adminHeader %}
     <span><a class="btn btn-outline-light border-0" href="/blog/{{ post.slug }}"><i class="fas fa-arrow-left"></i></a></span>
     <span class="font-weight-bold ml-4">Edition du post</span>
-    <div class="ml-auto"><a class="btn btn-outline-light border-0" href="/blog/edit-post/{{ post.slug }}"><i class="material-icons-outlined">done</i></a></div>
+    <div class="ml-auto"><a class="btn btn-outline-light border-0" href="#" onclick="save()"><i class="material-icons-outlined">done</i></a></div>
     <div class="ml-1"><a class="btn btn-outline-light border-0" href="/blog/edit-post/{{ post.slug }}"><i class="material-icons-outlined">delete</i></a></div>
 {% endset %}
 
@@ -37,4 +37,31 @@
             </div>
         </div>
     </section>
+
+    <script>
+        function save(){
+            var form = document.createElement("form");
+            var title = document.createElement("input");
+            var desc = document.createElement("input");
+            var content = document.createElement("input");
+
+            form.method = "POST";
+
+            title.value = document.querySelector('.dfree-title').innerHTML;
+            title.name = "title";
+            form.appendChild(title);
+
+            desc.value = document.querySelector('.dfree-desc').innerHTML;
+            desc.name = "desc";
+            form.appendChild(desc);
+
+            content.value = document.querySelector('.dfree-content').innerHTML;
+            content.name = "content";
+            form.appendChild(content);
+
+            document.body.appendChild(form);
+
+            form.submit();
+        }
+    </script>
 {% endblock %}

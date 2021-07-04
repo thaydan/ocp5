@@ -1,13 +1,6 @@
-{# /templates/login.html.twig #}
 {% extends 'base.html.twig' %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="stylesheet" href="produit.css" type="text/css" media="all" />
-{% endblock%}
-
 {% block contenuPrincipal %}
-
     <!-- Masthead-->
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
@@ -30,17 +23,9 @@
             <!-- Contact Section Form-->
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-{#                    {{ dump(formContact) }}#}
                     {{ form(formLogin) }}
-{#                    {% include 'components/form.html.twig' with form %}#}
                 </div>
             </div>
         </div>
     </section>
-
-
-{% endblock %}
-
-{% block javascripts %}
-    {# <script src="build/produit.js" /> #}
 {% endblock %}

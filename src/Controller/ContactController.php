@@ -18,34 +18,58 @@ class ContactController extends AController
     }
 
     public function show() {
-        $headTitle = 'Contact - Romain Royer';
-
         $formContact = new Form(
             [
-                'username' => new TextType(
+                'name' => new TextType(
                     [
                         new NotNullConstraint(),
                         new NotBlankConstraint()
                     ],
                     [
-                        'label' => 'Nom d\'utilisateur'
+                        'label' => 'Nom'
                     ]
                 ),
-                'content' => new TextAreaType(
+                'email' => new TextType(
                     [
                         new NotNullConstraint(),
                         new NotBlankConstraint()
                     ],
                     [
-                        'label' => 'Contenu'
+                        'label' => 'Adresse e-mail'
                     ]
                 ),
-                'submit' => new SubmitType()
+                'phone' => new TextType(
+                    [
+                        new NotNullConstraint(),
+                        new NotBlankConstraint()
+                    ],
+                    [
+                        'label' => 'Téléphone'
+                    ]
+                ),
+                'message' => new TextAreaType(
+                    [
+                        new NotNullConstraint(),
+                        new NotBlankConstraint()
+                    ],
+                    [
+                        'label' => 'Message'
+                    ]
+                ),
+                'submit' => new SubmitType(
+                    [],
+                    [
+                        'label' => 'Envoyer'
+                    ]
+                )
             ]
         );
 
+        $headTitle = 'Contact - Romain Royer';
+
         $this->render('contact.html.twig', [
-            'headTitle' => $headTitle
+            'headTitle' => $headTitle,
+            'formContact' => $formContact
         ]);
     }
 }

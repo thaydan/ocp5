@@ -1,8 +1,7 @@
-<div>
-    <label>
-        {{- formType.options.label ?? name -}}
-        <textarea name="{{ name }}">
-            {{- formType.value -}}
-        </textarea>
-    </label>
+<div class="control-group">
+    <div class="form-group floating-label-form-group controls mb-0 pb-2">
+        <label>{{ formType.options.label ?? name }}</label>
+        <textarea class="form-control" name="{{ name }}" rows="5" placeholder="{{ formType.options.label ?? name }}" required="required" data-validation-required-message="Veuillez entrer un message."></textarea>
+        <p class="help-block text-danger"></p>
+    </div>
 </div>
