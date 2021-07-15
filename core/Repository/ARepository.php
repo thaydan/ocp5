@@ -58,13 +58,9 @@ abstract class ARepository
     {
         $allDatas = $datas;
         $allDatas['slug'] = $slug;
-        var_dump($allDatas);
-        var_dump('UPDATE ' . $this->getTableName() . ' SET ' . $this->createUpdateQueryWithDatas($datas) . ' WHERE slug=:slug');
-        return Database::getInstance()->query(
+        Database::getInstance()->queryUpdate(
             'UPDATE ' . $this->getTableName() . ' SET ' . $this->createUpdateQueryWithDatas($datas) . ' WHERE slug=:slug',
-            $allDatas,
-            $this->getEntityClassName(),
-            true
+            $allDatas
         );
     }
 
@@ -94,7 +90,7 @@ abstract class ARepository
         return join(', ',
                 array_map(
                     function ($key) {
-                        return $this->toSnakeCase($key) . ' = :' . $key;
+                        return "`" . $this->toSnakeCase($key) . "`" . ' = :' . $key;
                     },
                     array_keys($datas)
                 )

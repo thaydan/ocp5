@@ -49,4 +49,10 @@ class Database
 
         return $request->fetchAll();
     }
+
+    public function queryUpdate(string $statement, array $parameters = [])
+    {
+        $request = $this->db->prepare($statement);
+        $request->execute($parameters);
+    }
 }
