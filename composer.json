@@ -3,7 +3,8 @@
     "description": "Romain's Book",
     "require": {
         "twig/twig": "^3.3",
-        "symfony/dotenv": "^5.2"
+        "symfony/dotenv": "^5.2",
+        "swiftmailer/swiftmailer": "^6.0"
     },
     "autoload": {
         "psr-4": {
