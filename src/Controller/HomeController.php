@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\PostRepository;
 use Core\Controller\AController;
 use Core\Form\Constraint\NotBlankConstraint;
 use Core\Form\Constraint\NotNullConstraint;
@@ -67,11 +68,14 @@ class HomeController extends AController
 
         $formContact->handleRequest();
 
-        //$posts = $this->;
         $headTitle = 'Romain Royer';
+
+        $postRepository = new PostRepository();
+        $posts = $postRepository->findAll();        // AJOUTER LIMIT 6 POSTS
 
         $this->render('home.html.twig', [
             'headTitle' => $headTitle,
+            'posts' => $posts,
             'formContact' => $formContact
         ]);
 

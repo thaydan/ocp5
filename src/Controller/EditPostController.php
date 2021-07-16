@@ -21,7 +21,7 @@ class EditPostController extends AController
 
         $post = [
             'title' => 'Nouvel article',
-            'desc' => 'Description du nouvel article',
+            'description' => 'Description du nouvel article',
             'content' => 'Contenu du nouvel article'
         ];
 
