@@ -73,4 +73,11 @@ abstract class AController
 
         echo $twig->render($name, $context);
     }
+
+    protected function redirect(string $location)
+    {
+        header('Location: '. $location);
+        exit;
+    }
+
 }

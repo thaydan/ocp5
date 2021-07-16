@@ -11,11 +11,13 @@ class EditPostController extends AController
 
     private $post;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->post = new Post();
     }
 
-    public function edit($slug = null) {
+    public function edit($slug = null)
+    {
 
         $post = [
             'title' => 'Nouvel article',
@@ -27,16 +29,27 @@ class EditPostController extends AController
 
         $postRepository = new PostRepository();
         if ($_POST) {
-            $post = $postRepository->edit($slug, $_POST);
+            $_POST['published_date'] = date("Y-m-d H:i:s");
+
+            if(!$slug) {
+                $slug = $this->slugify($_POST['title']);
+            }
+
+            $post = $postRepository->findOneBy(['slug' => $slug]);
+            if($post) {
+                $post = $postRepository->edit($slug, $_POST);
+            }
+            else {
+                $post = $postRepository->add($slug, $_POST);
+            }
+
+            $this->redirect('/blog/' . $slug);
         }
 
-        if($slug) {
+        if ($slug) {
             $post = $postRepository->findOneBy(['slug' => $slug]);
             $headTitle = $post->title . ' - Romain Royer';
         }
-
-        //$formLogin->handleRequest();
-
 
         $this->render('edit-post.html.twig', [
             'headTitle' => $headTitle,
@@ -44,8 +57,37 @@ class EditPostController extends AController
         ]);
     }
 
-    public function save(){
+    public function delete($slug)
+    {
+        $postRepository = new PostRepository();
+        $post = $postRepository->edit($slug, $_POST);
+    }
 
+    public static function slugify($text, string $divider = '-')
+    {
+        // replace non letter or digits by divider
+        $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
+
+        // transliterate
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+
+        // remove unwanted characters
+        $text = preg_replace('~[^-\w]+~', '', $text);
+
+        // trim
+        $text = trim($text, $divider);
+
+        // remove duplicate divider
+        $text = preg_replace('~-+~', $divider, $text);
+
+        // lowercase
+        $text = strtolower($text);
+
+        if (empty($text)) {
+            return 'new-post-'. date("Y-m-d-H-i-s");
+        }
+
+        return $text;
     }
 
 }

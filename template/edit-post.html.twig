@@ -25,7 +25,7 @@
                 <div class="divider-custom-line"></div>
             </div>
             <!-- Masthead Subheading-->
-            <p class="dfree-desc masthead-subheading font-weight-light mb-0">{{ post.desc }}</p>
+            <p class="dfree-desc masthead-subheading font-weight-light mb-0">{{ post.description }}</p>
         </div>
     </header>
 
@@ -42,7 +42,7 @@
         function save(){
             var form = document.createElement("form");
             var title = document.createElement("input");
-            var desc = document.createElement("input");
+            var description = document.createElement("input");
             var content = document.createElement("input");
 
             form.method = "POST";
@@ -51,9 +51,9 @@
             title.name = "title";
             form.appendChild(title);
 
-            desc.value = document.querySelector('.dfree-desc').innerHTML;
-            desc.name = "desc";
-            form.appendChild(desc);
+            description.value = document.querySelector('.dfree-desc').innerHTML;
+            description.name = "description";
+            form.appendChild(description);
 
             content.value = document.querySelector('.dfree-content').innerHTML;
             content.name = "content";

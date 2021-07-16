@@ -54,16 +54,6 @@ abstract class ARepository
         );
     }
 
-    public function edit(string $slug, array $datas)
-    {
-        $allDatas = $datas;
-        $allDatas['slug'] = $slug;
-        Database::getInstance()->queryUpdate(
-            'UPDATE ' . $this->getTableName() . ' SET ' . $this->createUpdateQueryWithDatas($datas) . ' WHERE slug=:slug',
-            $allDatas
-        );
-    }
-
     /**
      * @param array $filters
      * @return string
@@ -81,6 +71,54 @@ abstract class ARepository
             );
     }
 
+    public function add(string $slug, array $datas)
+    {
+        $allDatas = $datas;
+        $allDatas['slug'] = $slug;
+        $addQueries = $this->createInsertQueryWithDatas($allDatas);
+        var_dump('INSERT INTO ' . $this->getTableName() . $addQueries['columns'] .' VALUES ' . $addQueries['values']);
+        Database::getInstance()->queryUpdate(
+            'INSERT INTO ' . $this->getTableName() . $addQueries['columns'] .' VALUES ' . $addQueries['values'],
+            $allDatas
+        );
+    }
+
+    /**
+     * @param array $filters
+     * @return array
+     */
+    private function createInsertQueryWithDatas(array $datas): array
+    {
+        $queries['columns'] = ' ('. join(', ', array_keys($datas)) .') ';
+        $queries['values'] = join(', ',
+            array_map(
+                function ($key) {
+                    return ':' . $key;
+                },
+                array_keys($datas)
+            )
+        );
+        $queries['values'] = ' ('. $queries['values'] .') ';
+        return $queries;
+    }
+
+    public function edit(string $slug, array $datas)
+    {
+        $allDatas = $datas;
+        $allDatas['slug'] = $slug;
+        Database::getInstance()->queryUpdate(
+            'UPDATE ' . $this->getTableName() . ' SET ' . $this->createUpdateQueryWithDatas($datas) . ' WHERE slug=:slug',
+            $allDatas
+        );
+    }
+
+    public function delete(string $slug)
+    {
+        Database::getInstance()->queryUpdate(
+            'DELETE FROM ' . $this->getTableName() . ' WHERE slug = :slug'
+        );
+    }
+
     /**
      * @param array $filters
      * @return string
@@ -88,13 +126,13 @@ abstract class ARepository
     private function createUpdateQueryWithDatas(array $datas): string
     {
         return join(', ',
-                array_map(
-                    function ($key) {
-                        return "`" . $this->toSnakeCase($key) . "`" . ' = :' . $key;
-                    },
-                    array_keys($datas)
-                )
-            );
+            array_map(
+                function ($key) {
+                    return "`" . $this->toSnakeCase($key) . "`" . ' = :' . $key;
+                },
+                array_keys($datas)
+            )
+        );
     }
 
     public function __call($name, $arguments)

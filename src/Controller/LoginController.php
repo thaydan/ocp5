@@ -55,8 +55,7 @@ class LoginController extends AController
         }
 
         if (Auth::isConnected()) {
-            header('Location: /blog');
-            exit;
+            $this->redirect('/blog');
         }
 
         $headTitle = 'Login - Romain Royer';
