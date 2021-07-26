@@ -41,6 +41,7 @@ $router->get('/profile', [new ProfileController, 'show']);
 $router->get('/blog/edit-post',  [new EditPostController, 'edit']);
 $router->get('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'edit_post', );
 $router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'edit_post', );
+$router->get('/blog/delete-post/:slug',  [new EditPostController, 'delete'], 'delete_post', );
 $router->post('/blog/edit-post',  [new EditPostController, 'edit']);
 $router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit']);
 //$router->get('/edit-post/:id', [new DashboardController, 'dashboard']);

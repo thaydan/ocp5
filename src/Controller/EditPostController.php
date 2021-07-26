@@ -60,7 +60,8 @@ class EditPostController extends AController
     public function delete($slug)
     {
         $postRepository = new PostRepository();
-        $post = $postRepository->edit($slug, $_POST);
+        $postRepository->delete($slug);
+        $this->redirect('/blog');
     }
 
     public static function slugify($text, string $divider = '-')
