@@ -12,8 +12,11 @@ class PostController extends AController
         $postRepository = new PostRepository();
         $post = $postRepository->findOneBy(['slug' => $slug]);
 
-        $headTitle = $post->title . ' - Romain Royer';
+        if(!$post) {
+            throw new \Exception('Aucun article ne correspond à cet identifiant');
+        }
 
+        $headTitle = $post->title . ' - Romain Royer';
 
         $this->render('post.html.twig', [
             'headTitle' => $headTitle,

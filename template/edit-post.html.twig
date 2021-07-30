@@ -18,7 +18,7 @@
 
     <!-- Masthead-->
     <header class="masthead {{ adminHeaderDisplayedClass }} bg-primary text-white text-center">
-        <div class="container d-flex align-items-center flex-column"
+        <div id="featured-image-container" class="container d-flex align-items-center flex-column"
              style="background-image: url('{{ post.featured_image }}')">
             <!-- Masthead Heading-->
             <h1 class="dfree-title masthead-heading text-uppercase mb-0">{{ post.title }}</h1>
@@ -31,10 +31,10 @@
             <!-- Masthead Subheading-->
             <p class="dfree-desc masthead-subheading font-weight-light mb-0">{{ post.description }}</p>
             <div id="featured-image-selector">
-                <label for="file-input">
+                <label for="image-input">
                     <i class="material-icons-outlined">add_photo_alternate</i>
                 </label>
-                <input id="file-input" type="file" name="featured-image">
+                <input id="image-input" form="form-edit-post" type="file" name="featured-image">
             </div>
         </div>
     </header>
@@ -42,9 +42,9 @@
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container mb-2">
-            <div class="dfree-slug">
+            <p class="dfree-slug">
                 {{ post.slug|raw }}
-            </div>
+            </p>
         </div>
         <div class="container">
             <div class="dfree-content">
@@ -53,22 +53,33 @@
         </div>
     </section>
 
-    <script>
-        function save() {
-            var form = document.createElement("form");
+    <form id="form-edit-post" style="display: none;" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{ post.id }}">
+    </form>
 
+    <script>
+        let form = document.getElementById('form-edit-post');
+        let imageInput = document.getElementById('image-input');
+        let imagePreview = document.getElementById('featured-image-container');
+        let defaultImage = imagePreview.style.backgroundImage;
+        console.log(imageInput);
+
+        imageInput.addEventListener('change', function (e) {
+            console.log(URL.createObjectURL(imageInput.files[0]));
+            if (!imageInput.files[0]) {
+                imagePreview.style.backgroundImage = defaultImage;
+                return;
+            }
+
+            imagePreview.style.backgroundImage = "url:('" + URL.createObjectURL(imageInput.files[0]) + "')";
+            console.log('222');
+        });
+
+        function save() {
             var title = document.createElement("input");
             var description = document.createElement("input");
             var slug = document.createElement("input");
-            if (document.querySelector('#featured-image-selector input').innerHTML) {
-                var featuredImage = document.createElement("input");
-                featuredImage.value = document.querySelector('.dfree-slug').innerHTML;
-                featuredImage.name = "featured_image";
-                form.appendChild(featuredImage);
-            }
             var content = document.createElement("input");
-
-            form.method = "POST";
 
             title.value = document.querySelector('.dfree-title').innerHTML;
             title.name = "title";

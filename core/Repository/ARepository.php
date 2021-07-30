@@ -71,15 +71,13 @@ abstract class ARepository
             );
     }
 
-    public function add(string $slug, array $datas)
+    public function add(array $datas)
     {
-        $allDatas = $datas;
-        $allDatas['slug'] = $slug;
-        $addQueries = $this->createInsertQueryWithDatas($allDatas);
-        var_dump('INSERT INTO ' . $this->getTableName() . $addQueries['columns'] .' VALUES ' . $addQueries['values']);
+        unset($datas['id']);
+        $addQueries = $this->createInsertQueryWithDatas($datas);
         Database::getInstance()->queryUpdate(
             'INSERT INTO ' . $this->getTableName() . $addQueries['columns'] .' VALUES ' . $addQueries['values'],
-            $allDatas
+            $datas
         );
     }
 
@@ -102,21 +100,11 @@ abstract class ARepository
         return $queries;
     }
 
-    public function edit(string $slug, array $datas)
-    {
-        $allDatas = $datas;
-        $allDatas['slug'] = $slug;
-        Database::getInstance()->queryUpdate(
-            'UPDATE ' . $this->getTableName() . ' SET ' . $this->createUpdateQueryWithDatas($datas) . ' WHERE slug=:slug',
-            $allDatas
-        );
-    }
-
-    public function delete(string $slug)
+    public function edit(array $datas)
     {
         Database::getInstance()->queryUpdate(
-            'DELETE FROM ' . $this->getTableName() . ' WHERE slug = :slug',
-            ['slug' => $slug]
+            'UPDATE ' . $this->getTableName() . ' SET ' . $this->createUpdateQueryWithDatas($datas) . ' WHERE id = :id',
+            $datas
         );
     }
 
@@ -133,6 +121,14 @@ abstract class ARepository
                 },
                 array_keys($datas)
             )
+        );
+    }
+
+    public function delete(string $slug)
+    {
+        Database::getInstance()->queryUpdate(
+            'DELETE FROM ' . $this->getTableName() . ' WHERE slug = :slug',
+            ['slug' => $slug]
         );
     }
 

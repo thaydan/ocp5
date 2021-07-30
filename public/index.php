@@ -1,6 +1,7 @@
 <?php
 
 use App\Controller\DashboardController;
+use App\Controller\ErrorController;
 use App\Controller\LogoutController;
 use Symfony\Component\Dotenv\Dotenv;
 use Core\Router\Router;
@@ -55,4 +56,9 @@ $router->get('/blog/:slug',  [new PostController, 'show']);
 //$router->put();
 //$router->delete();
 
-$router->run();
+try {
+    $router->run();
+} catch (Exception $e) {
+    $error = new ErrorController();
+    $error->defaultError($e->getMessage());
+}
