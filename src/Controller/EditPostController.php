@@ -30,6 +30,8 @@ class EditPostController extends AController
         $postRepository = new PostRepository();
 
         if ($_POST) {
+            var_dump($_POST, $_FILES);
+            die();
             /*var_dump($_POST, $_FILES);
             die();
 
@@ -60,8 +62,7 @@ class EditPostController extends AController
                 $post = $postRepository->add($_POST);
             }
 
-            var_dump($post);
-            $this->redirect('/blog/' . $post['slug']);
+            $this->redirect('/blog/' . $_POST['slug']);
         }
 
         if ($slug) {
