@@ -32,10 +32,8 @@ class EditPostController extends AController
         if ($_POST) {
             var_dump($_POST, $_FILES);
             die();
-            /*var_dump($_POST, $_FILES);
-            die();
 
-            if($_FILES['featured-image']) {
+            /* if($_FILES['featured-image']) {
                 var_dump($_FILES);
                 $tmpName = $_FILES['featured-image']['tmp_name'];
                 $name = $_FILES['featured-image']['name'];
@@ -50,16 +48,16 @@ class EditPostController extends AController
 
             $_POST['published_date'] = date("Y-m-d H:i:s");
 
-            if (!$_POST['slug']) {
+            $_POST['slug'] = trim($_POST['slug']);
+            if (!($_POST['slug'])) {
                 $_POST['slug'] = $this->slugify($_POST['title']);
             }
-            $slug = $_POST['slug'];
 
             $post = $postRepository->findOneBy(['id' => $_POST['id']]);
             if ($post) {
-                $post = $postRepository->edit($_POST);
+                $postRepository->edit($_POST);
             } else {
-                $post = $postRepository->add($_POST);
+                $postRepository->add($_POST);
             }
 
             $this->redirect('/blog/' . $_POST['slug']);
