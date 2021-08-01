@@ -1,10 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% set adminHeader %}
-    <span><a class="btn btn-outline-light border-0" href="/blog/{{ post.slug }}"><i class="fas fa-arrow-left"></i></a></span>
+    <span><a class="btn btn-outline-light border-0" href="/blog/{{ post.slug }}"><i
+                    class="fas fa-arrow-left"></i></a></span>
     <span class="font-weight-bold ml-4">Edition du post</span>
-    <div class="ml-auto"><a class="btn btn-outline-light border-0" href="#" onclick="save()"><i class="material-icons-outlined">done</i></a></div>
-    <div class="ml-1"><a class="btn btn-outline-light border-0" href="/blog/edit-post/{{ post.slug }}"><i class="material-icons-outlined">delete</i></a></div>
+    <div class="ml-auto"><a class="btn btn-outline-light border-0" href="#" onclick="save()"><i
+                    class="material-icons-outlined">done</i></a></div>
+    <div class="ml-1"><a class="btn btn-outline-light border-0" href="#" onclick="deletePost('{{ post.slug }}')"><i
+                    class="material-icons-outlined">delete</i></a></div>
 {% endset %}
 
 {% block contenuPrincipal %}
@@ -15,7 +18,8 @@
 
     <!-- Masthead-->
     <header class="masthead {{ adminHeaderDisplayedClass }} bg-primary text-white text-center">
-        <div class="container d-flex align-items-center flex-column">
+        <div id="featured-image-container" class="container d-flex align-items-center flex-column"
+             style="background-image: url('{{ post.featured_image }}')">
             <!-- Masthead Heading-->
             <h1 class="dfree-title masthead-heading text-uppercase mb-0">{{ post.title }}</h1>
             <!-- Icon Divider-->
@@ -26,11 +30,22 @@
             </div>
             <!-- Masthead Subheading-->
             <p class="dfree-desc masthead-subheading font-weight-light mb-0">{{ post.description }}</p>
+            <div id="featured-image-selector">
+                <label for="image-input">
+                    <i class="material-icons-outlined">add_photo_alternate</i>
+                </label>
+                <input id="image-input" form="form-edit-post" type="file" name="featured-image">
+            </div>
         </div>
     </header>
 
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">
+        <div class="container mb-2">
+            <p class="dfree-slug">
+                {{ post.slug|raw }}
+            </p>
+        </div>
         <div class="container">
             <div class="dfree-content">
                 {{ post.content|raw }}
@@ -38,14 +53,33 @@
         </div>
     </section>
 
+    <form id="form-edit-post" style="display: none;" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="{{ post.id }}">
+    </form>
+
     <script>
-        function save(){
-            var form = document.createElement("form");
+        let form = document.getElementById('form-edit-post');
+        let imageInput = document.getElementById('image-input');
+        let imagePreview = document.getElementById('featured-image-container');
+        let defaultImage = imagePreview.style.backgroundImage;
+        console.log(imageInput);
+
+        imageInput.addEventListener('change', function (e) {
+            console.log(URL.createObjectURL(imageInput.files[0]));
+            if (!imageInput.files[0]) {
+                imagePreview.style.backgroundImage = defaultImage;
+                return;
+            }
+
+            imagePreview.style.backgroundImage = "url:('" + URL.createObjectURL(imageInput.files[0]) + "')";
+            console.log('222');
+        });
+
+        function save() {
             var title = document.createElement("input");
             var description = document.createElement("input");
+            var slug = document.createElement("input");
             var content = document.createElement("input");
-
-            form.method = "POST";
 
             title.value = document.querySelector('.dfree-title').innerHTML;
             title.name = "title";
@@ -55,6 +89,10 @@
             description.name = "description";
             form.appendChild(description);
 
+            slug.value = document.querySelector('.dfree-slug').innerHTML;
+            slug.name = "slug";
+            form.appendChild(slug);
+
             content.value = document.querySelector('.dfree-content').innerHTML;
             content.name = "content";
             form.appendChild(content);
@@ -62,6 +100,12 @@
             document.body.appendChild(form);
 
             form.submit();
+        }
+
+        function deletePost(slug) {
+            if (confirm("Confirmer la suppression ?")) {
+                window.location.href = "/blog/delete-post/" + slug;
+            }
         }
     </script>
 {% endblock %}

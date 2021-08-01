@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block contenuPrincipal %}
+    <h1>{{ errorMsg }}</h1>
+
+    <!-- Masthead-->
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <!-- Masthead Heading-->
+            <h1 class="masthead-heading text-uppercase mb-0">Erreur 404</h1>
+            <!-- Icon Divider-->
+            <div class="divider-custom divider-light">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- Masthead Subheading-->
+            <p class="masthead-subheading font-weight-light mb-0">La page n'a pas été trouvée</p>
+        </div>
+    </header>
+
+    <!-- Error Section-->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    {{ errorMsg }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

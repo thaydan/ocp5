@@ -1,6 +1,7 @@
 <?php
 
 use App\Controller\DashboardController;
+use App\Controller\ErrorController;
 use App\Controller\LogoutController;
 use Symfony\Component\Dotenv\Dotenv;
 use Core\Router\Router;
@@ -41,6 +42,7 @@ $router->get('/profile', [new ProfileController, 'show']);
 $router->get('/blog/edit-post',  [new EditPostController, 'edit']);
 $router->get('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'edit_post', );
 $router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'edit_post', );
+$router->get('/blog/delete-post/:slug',  [new EditPostController, 'delete'], 'delete_post', );
 $router->post('/blog/edit-post',  [new EditPostController, 'edit']);
 $router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit']);
 //$router->get('/edit-post/:id', [new DashboardController, 'dashboard']);
@@ -54,4 +56,9 @@ $router->get('/blog/:slug',  [new PostController, 'show']);
 //$router->put();
 //$router->delete();
 
-$router->run();
+try {
+    $router->run();
+} catch (Exception $e) {
+    $error = new ErrorController();
+    $error->defaultError($e->getMessage());
+}

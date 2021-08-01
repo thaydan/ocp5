@@ -28,26 +28,44 @@ class EditPostController extends AController
         $headTitle = 'Nouvel article - Romain Royer';
 
         $postRepository = new PostRepository();
+
         if ($_POST) {
+            var_dump($_POST, $_FILES);
+            die();
+
+            /* if($_FILES['featured-image']) {
+                var_dump($_FILES);
+                $tmpName = $_FILES['featured-image']['tmp_name'];
+                $name = $_FILES['featured-image']['name'];
+                $size = $_FILES['featured-image']['size'];
+                $error = $_FILES['featured-image']['error'];
+                $targetDir = "uploads/";
+                $filename = $book->getCoverFile()->getFilename();
+                $targetFile = $targetDir . uniqid() . '-' . basename($filename);
+                $book->getCoverFile()->moveTo($targetFile);
+                $book->setCoverFilename($filename);
+            }*/
+
             $_POST['published_date'] = date("Y-m-d H:i:s");
 
-            if(!$slug) {
-                $slug = $this->slugify($_POST['title']);
+            $_POST['slug'] = trim($_POST['slug']);
+            if (!($_POST['slug'])) {
+                $_POST['slug'] = $this->slugify($_POST['title']);
             }
 
-            $post = $postRepository->findOneBy(['slug' => $slug]);
-            if($post) {
-                $post = $postRepository->edit($slug, $_POST);
-            }
-            else {
-                $post = $postRepository->add($slug, $_POST);
+            $post = $postRepository->findOneBy(['id' => $_POST['id']]);
+            if ($post) {
+                $postRepository->edit($_POST);
+            } else {
+                $postRepository->add($_POST);
             }
 
-            $this->redirect('/blog/' . $slug);
+            $this->redirect('/blog/' . $_POST['slug']);
         }
 
         if ($slug) {
             $post = $postRepository->findOneBy(['slug' => $slug]);
+            if (!$post) throw new \Exception('Aucun article ne correspond à cet identifiant');
             $headTitle = $post->title . ' - Romain Royer';
         }
 
@@ -60,7 +78,8 @@ class EditPostController extends AController
     public function delete($slug)
     {
         $postRepository = new PostRepository();
-        $post = $postRepository->edit($slug, $_POST);
+        $postRepository->delete($slug);
+        $this->redirect('/blog');
     }
 
     public static function slugify($text, string $divider = '-')
@@ -84,7 +103,7 @@ class EditPostController extends AController
         $text = strtolower($text);
 
         if (empty($text)) {
-            return 'new-post-'. date("Y-m-d-H-i-s");
+            return 'new-post-' . date("Y-m-d-H-i-s");
         }
 
         return $text;

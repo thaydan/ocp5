@@ -28,8 +28,8 @@
         inline: true,
         toolbar: false,
         plugins: [ 'quickbars' ],
-        quickbars_insert_toolbar: 'undo redo',
-        quickbars_selection_toolbar: 'italic underline',
+        quickbars_insert_toolbar: false,
+        quickbars_selection_toolbar: false
     };
 
     var dfreeDescConfig = {
@@ -39,8 +39,19 @@
         inline: true,
         toolbar: false,
         plugins: [ 'quickbars' ],
-        quickbars_insert_toolbar: 'undo redo',
-        quickbars_selection_toolbar: 'italic underline',
+        quickbars_insert_toolbar: false,
+        quickbars_selection_toolbar: false
+    };
+
+    var dfreeSlugConfig = {
+        selector: '.dfree-slug',
+        placeholder: "Ajouter un slug",
+        menubar: false,
+        inline: true,
+        toolbar: false,
+        plugins: [ 'quickbars' ],
+        quickbars_insert_toolbar: false,
+        quickbars_selection_toolbar: false
     };
 
     var dfreeContentConfig = {
@@ -71,5 +82,6 @@
 
     tinymce.init(dfreeTitleConfig);
     tinymce.init(dfreeDescConfig);
+    tinymce.init(dfreeSlugConfig);
     tinymce.init(dfreeContentConfig);
 </script>
