@@ -35,4 +35,16 @@
         </div>
     </section>
 
+    <section>
+        <h4>Commentaires</h4>
+        <div class="container">
+            <h5>Ajouter un commentaire</h5>
+            {{ form(formComments) }}
+        </div>
+        <div class="container">
+            <h5>Du plus récent au plus ancien</h5>
+            {{ showComments(comments) }}
+        </div>
+    </section>
+
 {% endblock %}

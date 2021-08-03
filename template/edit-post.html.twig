@@ -20,6 +20,7 @@
     <header class="masthead {{ adminHeaderDisplayedClass }} bg-primary text-white text-center">
         <div id="featured-image-container" class="container d-flex align-items-center flex-column"
              style="background-image: url('{{ post.featured_image }}')">
+            <img id="featured-image-container-2">
             <!-- Masthead Heading-->
             <h1 class="dfree-title masthead-heading text-uppercase mb-0">{{ post.title }}</h1>
             <!-- Icon Divider-->
@@ -61,17 +62,20 @@
         let form = document.getElementById('form-edit-post');
         let imageInput = document.getElementById('image-input');
         let imagePreview = document.getElementById('featured-image-container');
+        let imagePreview2 = document.getElementById('featured-image-container-2');
         let defaultImage = imagePreview.style.backgroundImage;
-        console.log(imageInput);
+        console.log(imageInput, defaultImage);
 
         imageInput.addEventListener('change', function (e) {
-            console.log(URL.createObjectURL(imageInput.files[0]));
             if (!imageInput.files[0]) {
                 imagePreview.style.backgroundImage = defaultImage;
                 return;
             }
 
-            imagePreview.style.backgroundImage = "url:('" + URL.createObjectURL(imageInput.files[0]) + "')";
+            let previewURL = URL.createObjectURL(imageInput.files[0]);
+            console.log(previewURL);
+            imagePreview.style.background = "url('" + previewURL + "')";
+            imagePreview2.src = previewURL;
             console.log('222');
         });
 

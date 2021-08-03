@@ -43,6 +43,22 @@ abstract class AController
 
         $twig->addFunction(
             new TwigFunction(
+                'showComments',
+                function ($comments) use ($twig) {
+                    foreach ($comments as $comment) {
+                        $twig->display(
+                            'components/comment.html.twig',
+                            [
+                                'comment' => $comment
+                            ]
+                        );
+                    }
+                }
+            )
+        );
+
+        $twig->addFunction(
+            new TwigFunction(
                 'className',
                 function ($object) {
                     $fullClassName = get_class($object);
