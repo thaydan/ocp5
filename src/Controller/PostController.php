@@ -22,7 +22,7 @@ class PostController extends AController
             throw new \Exception('Aucun article ne correspond à cet identifiant');
         }
 
-        $formComments = new Form(
+        $formAddComment = new Form(
             [
                 'name' => new TextType(
                     [
@@ -48,7 +48,7 @@ class PostController extends AController
                         new NotBlankConstraint()
                     ],
                     [
-                        'label' => 'Message'
+                        'label' => 'Commentaire'
                     ]
                 ),
                 'submit' => new SubmitType(
@@ -65,7 +65,7 @@ class PostController extends AController
         $this->render('post.html.twig', [
             'headTitle' => $headTitle,
             'post' => $post,
-            'formComments' => $formComments
+            'formAddComment' => $formAddComment
         ]);
     }
 }

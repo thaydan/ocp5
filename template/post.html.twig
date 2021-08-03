@@ -2,7 +2,8 @@
 
 {% set adminHeader %}
     <span class="font-weight-bold">Mode administrateur</span>
-    <div class="ml-auto"><a class="btn btn-outline-light border-0" href="/blog/edit-post/{{ post.slug }}"><i class="material-icons-outlined">edit</i></a></div>
+    <div class="ml-auto"><a class="btn btn-outline-light border-0" href="/blog/edit-post/{{ post.slug }}"><i
+                    class="material-icons-outlined">edit</i></a></div>
 {% endset %}
 
 {% block contenuPrincipal %}
@@ -13,7 +14,8 @@
 
     <!-- Masthead-->
     <header class="masthead {{ adminHeaderDisplayedClass }} bg-primary text-white text-center">
-        <div class="container d-flex align-items-center flex-column">
+        <div class="container d-flex align-items-center flex-column"
+             style="background-image: url('{{ post.featured_image }}')">
             <!-- Masthead Heading-->
             <h1 class="masthead-heading text-uppercase mb-0">{{ post.title }}</h1>
             <!-- Icon Divider-->
@@ -36,14 +38,15 @@
     </section>
 
     <section>
-        <h4>Commentaires</h4>
         <div class="container">
-            <h5>Ajouter un commentaire</h5>
-            {{ form(formComments) }}
-        </div>
-        <div class="container">
-            <h5>Du plus récent au plus ancien</h5>
-            {{ showComments(comments) }}
+            <h4 class="mb-5">Commentaires</h4>
+            <div class="my-5">
+                {{ showComments(comments) }}
+            </div>
+            <div class="my-5">
+                <h5>Ajouter un commentaire</h5>
+                {{ form(formAddComment) }}
+            </div>
         </div>
     </section>
 

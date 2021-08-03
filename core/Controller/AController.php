@@ -45,14 +45,12 @@ abstract class AController
             new TwigFunction(
                 'showComments',
                 function ($comments) use ($twig) {
-                    foreach ($comments as $comment) {
-                        $twig->display(
-                            'components/comment.html.twig',
-                            [
-                                'comment' => $comment
-                            ]
-                        );
-                    }
+                    $twig->display(
+                        'comments/comments.html.twig',
+                        [
+                            'comments' => $comments
+                        ]
+                    );
                 }
             )
         );
@@ -92,7 +90,7 @@ abstract class AController
 
     protected function redirect(string $location)
     {
-        header('Location: '. $location);
+        header('Location: ' . $location);
         exit;
     }
 
