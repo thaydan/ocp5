@@ -1,0 +1,10 @@
+{% if (comments) %}
+    <h5>Du plus récent au plus ancien</h5>
+    <div>
+        {% for comment in comments %}
+            {% include 'comments/comment.html.twig' with {'comment': comment.comment, 'authorName': comment.authorName} only %}
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="font-italic">Aucun commentaire, soyez le premier à laisser le votre.</p>
+{% endif %}
