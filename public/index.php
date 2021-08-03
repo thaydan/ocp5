@@ -1,6 +1,5 @@
 <?php
 
-use App\Controller\DashboardController;
 use App\Controller\ErrorController;
 use App\Controller\LogoutController;
 use Symfony\Component\Dotenv\Dotenv;
@@ -34,15 +33,14 @@ $router->get('/contact', [new ContactController, 'show']);
 $router->post('/contact', [new ContactController, 'send']);
 $router->get('/login', [new LoginController, 'login']);
 $router->post('/login', [new LoginController, 'login']);
-$router->post('/festival', [new LoginController, 'login']);
 $router->get('/logout', [new LogoutController, 'logout']);
 
 // if logged
 $router->get('/profile', [new ProfileController, 'show']);
 $router->get('/blog/edit-post',  [new EditPostController, 'edit']);
-$router->get('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'edit_post', );
-$router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'edit_post', );
-$router->get('/blog/delete-post/:slug',  [new EditPostController, 'delete'], 'delete_post', );
+$router->get('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'edit_post');
+$router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'edit_post');
+$router->get('/blog/delete-post/:slug',  [new EditPostController, 'delete'], 'delete_post');
 $router->post('/blog/edit-post',  [new EditPostController, 'edit']);
 $router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit']);
 //$router->get('/edit-post/:id', [new DashboardController, 'dashboard']);
