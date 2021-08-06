@@ -1,4 +1,4 @@
-<div class="comment mb-4 d-flex align-items-center">
+<div class="comment {{ (app.connected) ? 'admin' }} mb-4 d-flex align-items-center">
     <div{{ (comment.validated != 1) ? ' class="text-grey"' }}>
         <div><b>{{ comment.author_name }}</b></div>
         <div>{{ comment.comment }}</div>
@@ -6,9 +6,10 @@
     {% if app.connected %}
         <div class="ml-auto">
             {% if comment.validated %}
-                <a href="/comment/{{ comment.id }}/delete">Supprimer</a>
+                <a href="/comment/{{ comment.id }}/delete"><i class="material-icons-outlined">delete</i></a>
             {% else %}
-                <a href="/comment/{{ comment.id }}/validate">Valider</a><a class="ml-2" href="/comment/{{ comment.id }}/delete">Supprimer</a>
+                <a href="/comment/{{ comment.id }}/validate"><i class="material-icons-outlined">done</i></a>
+                <a class="ml-2" href="/comment/{{ comment.id }}/delete"><i class="material-icons-outlined">delete</i></a>
             {% endif %}
         </div>
     {% endif %}
