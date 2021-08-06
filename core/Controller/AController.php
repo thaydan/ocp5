@@ -5,6 +5,9 @@ namespace Core\Controller;
 use Core\Form\Form;
 use Core\Security\Auth;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFunction;
 
@@ -12,9 +15,9 @@ abstract class AController
 {
 
     /**
-     * @throws \Twig\Error\SyntaxError
-     * @throws \Twig\Error\RuntimeError
-     * @throws \Twig\Error\LoaderError
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
      */
 
     protected function render(string $name, array $context = []): void
@@ -36,7 +39,21 @@ abstract class AController
             new TwigFunction(
                 'dump',
                 function ($var, ...$vars) {
-                    dump($var, ...$vars);
+                    var_dump($var, ...$vars);
+                }
+            )
+        );
+
+        $twig->addFunction(
+            new TwigFunction(
+                'showComments',
+                function ($comments) use ($twig) {
+                    $twig->display(
+                        'comments/comments.html.twig',
+                        [
+                            'comments' => $comments
+                        ]
+                    );
                 }
             )
         );
@@ -56,9 +73,9 @@ abstract class AController
             new TwigFunction(
             /**
              * @param Form $form
-             * @throws \Twig\Error\LoaderError
-             * @throws \Twig\Error\RuntimeError
-             * @throws \Twig\Error\SyntaxError
+             * @throws LoaderError
+             * @throws RuntimeError
+             * @throws SyntaxError
              */ 'form',
                 function (Form $form) use ($twig) {
                     $twig->display(
@@ -76,7 +93,7 @@ abstract class AController
 
     protected function redirect(string $location)
     {
-        header('Location: '. $location);
+        header('Location: ' . $location);
         exit;
     }
 

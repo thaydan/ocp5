@@ -4,14 +4,16 @@
 namespace Core\Router;
 
 
-class Route {
+class Route
+{
 
     private $path;
     private $callable;
     private $matches = [];
     private $params = [];
 
-    public function __construct($path, $callable){
+    public function __construct($path, $callable)
+    {
         $this->path = trim($path, '/');  // On retire les / inutils
         $this->callable = $callable;
     }
@@ -20,11 +22,12 @@ class Route {
      * Permettra de capturer l'url avec les paramètre
      * get('/posts/:slug-:id') par exemple
      **/
-    public function match($url){
+    public function match($url): bool
+    {
         $url = trim($url, '/');
         $path = preg_replace('#:([\w]+)#', '([^/]+)', $this->path);
         $regex = "#^$path$#i";
-        if(!preg_match($regex, $url, $matches)){
+        if (!preg_match($regex, $url, $matches)) {
             return false;
         }
         array_shift($matches);
@@ -32,8 +35,9 @@ class Route {
         return true;
     }
 
-    public function call(){
-        if(is_string($this->callable)){
+    public function call()
+    {
+        if (is_string($this->callable)) {
             $params = explode('#', $this->callable);
             var_dump($this->callable);
             $controller = "App\\Controller\\" . $params[0] . "Controller";

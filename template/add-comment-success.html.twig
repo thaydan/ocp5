@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block contenuPrincipal %}
+    <h1>{{ errorMsg }}</h1>
+
+    <!-- Masthead-->
+    <header class="masthead bg-primary text-white text-center">
+        <div class="container d-flex align-items-center flex-column">
+            <!-- Masthead Heading-->
+            <h1 class="masthead-heading text-uppercase mb-0">Commentaire envoyé</h1>
+        </div>
+    </header>
+
+    <!-- Error Section-->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <p>Votre commentaire a été ajouté avec succès.<br>
+                        Il sera publié lorsqu'il aura été validé par un administrateur.</p>
+                    <p><a href="/blog/{{ post_slug }}">Retourner sur l'article</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

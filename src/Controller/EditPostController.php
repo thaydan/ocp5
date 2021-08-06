@@ -78,7 +78,7 @@ class EditPostController extends AController
     public function delete($slug)
     {
         $postRepository = new PostRepository();
-        $postRepository->delete($slug);
+        $postRepository->deleteBySlug($slug);
         $this->redirect('/blog');
     }
 

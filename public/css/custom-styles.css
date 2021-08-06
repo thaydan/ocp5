@@ -1,3 +1,7 @@
+.text-grey {
+    color: #bfbfbf;
+}
+
 .bg-grey {
     background-color: grey;
 }
@@ -55,6 +59,16 @@
     display: none;
 }
 /* end file selector */
+
+.comment {
+    margin: -10px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.comment.admin:hover {
+    background: #f9f9f9;
+}
 
 @media (max-width: 992px) {
     .masthead.admin-header-displayed {
