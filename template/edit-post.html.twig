@@ -11,25 +11,16 @@
 {% endset %}
 
 {% block contenuPrincipal %}
-
     {% if app.connected %}
         {% set adminHeaderDisplayedClass = 'admin-header-displayed' %}
     {% endif %}
 
-    <!-- Masthead-->
     <header class="masthead {{ adminHeaderDisplayedClass }} bg-primary text-white text-center">
         <div id="featured-image-container" class="container d-flex align-items-center flex-column"
              style="background-image: url('{{ (post.featured_image)?: '/assets/img/no-image.jpg' }}')">
             <img id="featured-image-container-2">
-            <!-- Masthead Heading-->
             <h1 class="dfree-title masthead-heading text-uppercase mb-0">{{ post.title }}</h1>
-            <!-- Icon Divider-->
-            <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
-            <!-- Masthead Subheading-->
+            {% include 'components/divider.html.twig' %}
             <p class="dfree-desc masthead-subheading font-weight-light mb-0">{{ post.description }}</p>
             <div id="featured-image-selector">
                 <label for="image-input">
@@ -40,8 +31,7 @@
         </div>
     </header>
 
-    <!-- Portfolio Section-->
-    <section class="page-section portfolio" id="portfolio">
+    <section class="page-section portfolio">
         <div class="container mb-2">
             <p class="dfree-slug">
                 {{ post.slug|raw }}
@@ -54,7 +44,7 @@
         </div>
     </section>
 
-    <form id="form-edit-post" style="display: none;" method="post" enctype="multipart/form-data">
+    <form id="form-edit-post" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="{{ post.id }}">
     </form>
 

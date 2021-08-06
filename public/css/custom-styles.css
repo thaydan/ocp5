@@ -1,3 +1,9 @@
+.mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before {
+    position: relative!important;
+    width: max-content;
+    -webkit-transform-origin-x: center;
+}
+
 .text-grey {
     color: #bfbfbf;
 }
@@ -60,6 +66,7 @@
 }
 /* end file selector */
 
+/* post page */
 .comment {
     margin: -10px;
     padding: 10px;
@@ -69,6 +76,13 @@
 .comment.admin:hover {
     background: #f9f9f9;
 }
+/* end post page */
+
+/* edit post page */
+#form-edit-post{
+    display: none;
+}
+/* end edit post page */
 
 @media (max-width: 992px) {
     .masthead.admin-header-displayed {

@@ -1,4 +1,3 @@
-{# /templates/parent.html.twig #}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,29 +7,20 @@
 
 {% include 'components/header.html.twig' with {'adminHeader': adminHeader} %}
 
-{#{% if app.connected %}
-    <div class="container-fluid bg-info p-4 text-white">
-        <div class="container d-flex align-items-center">
-            {% block adminHeader %}{% endblock %}
-        </div>
-    </div>
-{% endif %}#}
-
 {% block contenuPrincipal %}
     Contenu du body
 {% endblock %}
 
 {% include 'components/footer.html.twig' %}
+{% include 'components/scroll-to-top-button.html.twig' %}
 
-{% block javascripts %}{% endblock %}
-
-<!-- Bootstrap core JS-->
+{# Bootstrap core JS #}
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-<!-- Third party plugin JS-->
+{# Third party plugin JS #}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-<!-- Core theme JS-->
-<script src="/js/scripts.js"></script>
+{# Core theme JS #}
+<script src="/js/core-theme.js"></script>
 
 </body>
 </html>

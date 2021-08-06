@@ -7,31 +7,20 @@
 {% endset %}
 
 {% block contenuPrincipal %}
-
     {% if app.connected %}
         {% set adminHeaderDisplayedClass = 'admin-header-displayed' %}
     {% endif %}
 
-    <!-- Masthead-->
     <header class="masthead {{ adminHeaderDisplayedClass }} bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column"
              style="background-image: url('{{ (post.featured_image)?: '/assets/img/no-image.jpg' }}')">
-            <!-- Masthead Heading-->
             <h1 class="masthead-heading text-uppercase mb-0">{{ post.title }}</h1>
-            <!-- Icon Divider-->
-            <div class="divider-custom divider-light">
-                <div class="divider-custom-line"></div>
-                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                <div class="divider-custom-line"></div>
-            </div>
-            <!-- Masthead Subheading-->
+            {% include 'components/divider.html.twig' %}
             <p class="masthead-subheading font-weight-light mb-0">{{ post.description }}</p>
         </div>
     </header>
 
-
-    <!-- Portfolio Section-->
-    <section class="page-section portfolio" id="portfolio">
+    <section class="page-section">
         <div class="container">
             {{ post.content|raw }}
         </div>
@@ -49,5 +38,4 @@
             </div>
         </div>
     </section>
-
 {% endblock %}
