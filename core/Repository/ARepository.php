@@ -124,7 +124,15 @@ abstract class ARepository
         );
     }
 
-    public function delete(string $slug)
+    public function delete(string $id)
+    {
+        Database::getInstance()->queryUpdate(
+            'DELETE FROM ' . $this->getTableName() . ' WHERE id = :id',
+            ['id' => $id]
+        );
+    }
+
+    public function deleteBySlug(string $slug)
     {
         Database::getInstance()->queryUpdate(
             'DELETE FROM ' . $this->getTableName() . ' WHERE slug = :slug',

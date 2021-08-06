@@ -39,7 +39,7 @@ abstract class AController
             new TwigFunction(
                 'dump',
                 function ($var, ...$vars) {
-                    dump($var, ...$vars);
+                    var_dump($var, ...$vars);
                 }
             )
         );

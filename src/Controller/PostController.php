@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use Core\Controller\AController;
 use Core\Form\Constraint\NotBlankConstraint;
@@ -10,21 +11,37 @@ use Core\Form\Form;
 use Core\Form\Type\SubmitType;
 use Core\Form\Type\TextAreaType;
 use Core\Form\Type\TextType;
+use Core\Security\Auth;
 
 class PostController extends AController
 {
-    public function show($slug) {
+    public function show($slug)
+    {
 
         $postRepository = new PostRepository();
         $post = $postRepository->findOneBy(['slug' => $slug]);
 
-        if(!$post) {
+        if (!$post) {
             throw new \Exception('Aucun article ne correspond à cet identifiant');
+        }
+
+
+        $commentRepository = new CommentRepository();
+        if(Auth::isConnected()) {
+            $comments = $commentRepository->findBy([
+                'id_post' => $post->id
+            ]);
+        }
+        else {
+            $comments = $commentRepository->findBy([
+                'id_post' => $post->id,
+                'validated' => 1
+            ]);
         }
 
         $formAddComment = new Form(
             [
-                'name' => new TextType(
+                'author_name' => new TextType(
                     [
                         new NotNullConstraint(),
                         new NotBlankConstraint()
@@ -42,7 +59,7 @@ class PostController extends AController
                         'label' => 'Adresse e-mail'
                     ]
                 ),
-                'message' => new TextAreaType(
+                'comment' => new TextAreaType(
                     [
                         new NotNullConstraint(),
                         new NotBlankConstraint()
@@ -65,7 +82,27 @@ class PostController extends AController
         $this->render('post.html.twig', [
             'headTitle' => $headTitle,
             'post' => $post,
+            'comments' => $comments,
             'formAddComment' => $formAddComment
         ]);
     }
+
+    public function addComment($slug)
+    {
+        $postRepository = new PostRepository();
+        $post = $postRepository->findOneBy(['slug' => $slug]);
+
+        $_POST['id_post'] = $post->id;
+
+        $commentRepository = new CommentRepository();
+        $commentRepository->add($_POST);
+
+        $headTitle = $post->title . ' - Romain Royer';
+
+        $this->render('add-comment-success.html.twig', [
+            'headTitle' => $headTitle,
+            'post_slug' => $slug
+        ]);
+    }
+
 }

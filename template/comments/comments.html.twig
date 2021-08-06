@@ -1,8 +1,8 @@
 {% if (comments) %}
-    <h5>Du plus récent au plus ancien</h5>
+    <p class="font-italic mb-4">Du plus récent au plus ancien</p>
     <div>
         {% for comment in comments %}
-            {% include 'comments/comment.html.twig' with {'comment': comment.comment, 'authorName': comment.authorName} only %}
+            {% include 'comments/comment.html.twig' with {'comment': comment} only %}
         {% endfor %}
     </div>
 {% else %}

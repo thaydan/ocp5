@@ -1,5 +1,6 @@
 <?php
 
+use App\Controller\CommentController;
 use App\Controller\ErrorController;
 use App\Controller\LogoutController;
 use Symfony\Component\Dotenv\Dotenv;
@@ -43,12 +44,15 @@ $router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'edit_
 $router->get('/blog/delete-post/:slug',  [new EditPostController, 'delete'], 'delete_post');
 $router->post('/blog/edit-post',  [new EditPostController, 'edit']);
 $router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit']);
+$router->get('/comment/:id/validate',  [new CommentController, 'validate']);
+$router->get('/comment/:id/delete',  [new CommentController, 'delete']);
 //$router->get('/edit-post/:id', [new DashboardController, 'dashboard']);
 // end if logged
 
 
 $router->get('/blog', [new BlogController, 'show']);
 $router->get('/blog/:slug',  [new PostController, 'show']);
+$router->post('/blog/:slug',  [new PostController, 'addComment']);
 //$router->post('/blog/:id', function ($id){ echo "Poster pour l'article $id"; });
 
 //$router->put();

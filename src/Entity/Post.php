@@ -4,7 +4,9 @@
 namespace App\Entity;
 
 
-class Post
+use Core\Entity\IPost;
+
+class Post implements IPost
 {
     private ?string $posts;
     private ?string $post;
@@ -25,5 +27,10 @@ class Post
     public function sanitize(): void
     {
         $this->password = null;
+    }
+
+    public function getPassword(): ?string
+    {
+        // TODO: Implement getPassword() method.
     }
 }
