@@ -19,7 +19,7 @@
     <!-- Masthead-->
     <header class="masthead {{ adminHeaderDisplayedClass }} bg-primary text-white text-center">
         <div id="featured-image-container" class="container d-flex align-items-center flex-column"
-             style="background-image: url('{{ post.featured_image }}')">
+             style="background-image: url('{{ (post.featured_image)?: '/assets/img/no-image.jpg' }}')">
             <img id="featured-image-container-2">
             <!-- Masthead Heading-->
             <h1 class="dfree-title masthead-heading text-uppercase mb-0">{{ post.title }}</h1>

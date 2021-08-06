@@ -15,7 +15,7 @@
     <!-- Masthead-->
     <header class="masthead {{ adminHeaderDisplayedClass }} bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column"
-             style="background-image: url('{{ post.featured_image }}')">
+             style="background-image: url('{{ (post.featured_image)?: '/assets/img/no-image.jpg' }}')">
             <!-- Masthead Heading-->
             <h1 class="masthead-heading text-uppercase mb-0">{{ post.title }}</h1>
             <!-- Icon Divider-->

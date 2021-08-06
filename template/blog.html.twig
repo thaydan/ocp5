@@ -41,7 +41,7 @@
                                     <div class="portfolio-item-caption-content text-center text-white"><i
                                                 class="fas fa-plus fa-3x"></i></div>
                                 </div>
-                                <img class="img-fluid" src="{{ post.featured_image }}" alt="..."/>
+                                <img class="img-fluid" src="{{ (post.featured_image)?: '/assets/img/no-image.jpg' }}" alt="..."/>
                                 <div>{{ post.title }}</div>
                             </a>
                         </div>
