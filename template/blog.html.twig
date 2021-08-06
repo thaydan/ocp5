@@ -8,32 +8,23 @@
 {% endset %}
 
 {% block contenuPrincipal %}
-
     {% if app.connected %}
         {% set adminHeaderDisplayedClass = 'admin-header-displayed' %}
     {% endif %}
 
-    <!-- Masthead-->
     <header class="masthead {{ adminHeaderDisplayedClass }} bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
-            <!-- Masthead Heading-->
             <h1 class="masthead-heading text-uppercase">Blog</h1>
-            <!-- Masthead Subheading-->
             <p class="masthead-subheading font-weight-light mt-4 mb-0">Retrouvez mes dernières actualités</p>
         </div>
     </header>
 
-
-    <!-- Portfolio Section-->
-    <section class="page-section portfolio" id="portfolio">
+    <section class="page-section portfolio">
         <div class="container">
-
-            <!-- Portfolio Section Heading-->
             <h2 class="page-section-heading text-center text-uppercase text-secondary mb-5">Les derniers articles</h2>
-            <!-- Portfolio Grid Items-->
+
             <div class="row justify-content-center">
                 {% for post in posts %}
-                    <!-- Item -->
                     <div class="col-md-6 col-lg-4 mb-5">
                         <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
                             <a href="/blog/{{ post.slug }}">
@@ -50,5 +41,4 @@
             </div>
         </div>
     </section>
-
 {% endblock %}
