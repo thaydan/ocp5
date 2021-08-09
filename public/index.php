@@ -2,6 +2,7 @@
 
 use App\Controller\CommentController;
 use App\Controller\ErrorController;
+use App\Controller\LegalNoticeController;
 use App\Controller\LogoutController;
 use Symfony\Component\Dotenv\Dotenv;
 use Core\Router\Router;
@@ -53,7 +54,7 @@ $router->get('/comment/:id/delete',  [new CommentController, 'delete']);
 $router->get('/blog', [new BlogController, 'show']);
 $router->get('/blog/:slug',  [new PostController, 'show']);
 $router->post('/blog/:slug',  [new PostController, 'addComment']);
-//$router->post('/blog/:id', function ($id){ echo "Poster pour l'article $id"; });
+$router->get('/mentions-legales', [new LegalNoticeController, 'show']);
 
 //$router->put();
 //$router->delete();
