@@ -29,13 +29,13 @@ session_start();
 
 $router = new Router($_GET['url']);
 
-$router->get('/', [new HomeController, 'show']);
+$router->get('/', [new HomeController, 'show'], 'home');
 
-$router->get('/contact', [new ContactController, 'show']);
-$router->post('/contact', [new ContactController, 'send']);
-$router->get('/login', [new LoginController, 'login']);
-$router->post('/login', [new LoginController, 'login']);
-$router->get('/logout', [new LogoutController, 'logout']);
+$router->get('/contact', [new ContactController, 'show'], 'contact');
+$router->post('/contact', [new ContactController, 'send'], 'contact');
+$router->get('/login', [new LoginController, 'login'], 'login');
+$router->post('/login', [new LoginController, 'login'], 'login');
+$router->get('/logout', [new LogoutController, 'logout'], 'logout');
 
 /* admin routes */
 $router->get('/profile', [new ProfileController, 'show'], 'profile', 'admin');
@@ -49,10 +49,10 @@ $router->get('/comment/:id/delete',  [new CommentController, 'delete'], 'deleteP
 // end if logged
 
 
-$router->get('/blog', [new BlogController, 'show']);
-$router->get('/blog/:slug',  [new PostController, 'show']);
-$router->post('/blog/:slug',  [new PostController, 'addComment']);
-$router->get('/mentions-legales', [new LegalNoticeController, 'show']);
+$router->get('/blog', [new BlogController, 'show'], 'blog');
+$router->get('/blog/:slug',  [new PostController, 'show'], 'blogPost');
+$router->post('/blog/:slug',  [new PostController, 'addComment'], 'blogPost');
+$router->get('/mentions-legales', [new LegalNoticeController, 'show'], 'legalNotice');
 
 try {
     $router->run();
