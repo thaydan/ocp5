@@ -4,6 +4,8 @@
 namespace Core\Router;
 
 
+use Core\Security\Auth;
+
 class Router {
 
     private $url;
@@ -24,7 +26,7 @@ class Router {
 
     private function add($path, $callable, $name, $method, $login){
         $redirect = false;
-        if ($login == 'admin' && !isset($_SESSION['id'])) {
+        if ($login == 'admin' && !isset($_SESSION[Auth::SESSION_NAME])) {
             $redirect = true;
         }
 
