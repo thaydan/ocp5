@@ -11,11 +11,13 @@ class Route
     private $callable;
     private $matches = [];
     private $params = [];
+    public $redirect;
 
-    public function __construct($path, $callable)
+    public function __construct($path, $callable, $redirect = null)
     {
         $this->path = trim($path, '/');  // On retire les / inutils
         $this->callable = $callable;
+        $this->redirect = $redirect;
     }
 
     /**
@@ -37,6 +39,10 @@ class Route
 
     public function call()
     {
+        if ($this->redirect) {
+            header('Location: /');
+            exit();
+        }
         if (is_string($this->callable)) {
             $params = explode('#', $this->callable);
             var_dump($this->callable);

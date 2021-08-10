@@ -37,17 +37,15 @@ $router->get('/login', [new LoginController, 'login']);
 $router->post('/login', [new LoginController, 'login']);
 $router->get('/logout', [new LogoutController, 'logout']);
 
-// if logged
-$router->get('/profile', [new ProfileController, 'show']);
-$router->get('/blog/edit-post',  [new EditPostController, 'edit']);
-$router->get('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'edit_post');
-$router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'edit_post');
-$router->get('/blog/delete-post/:slug',  [new EditPostController, 'delete'], 'delete_post');
-$router->post('/blog/edit-post',  [new EditPostController, 'edit']);
-$router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit']);
-$router->get('/comment/:id/validate',  [new CommentController, 'validate']);
-$router->get('/comment/:id/delete',  [new CommentController, 'delete']);
-//$router->get('/edit-post/:id', [new DashboardController, 'dashboard']);
+/* admin routes */
+$router->get('/profile', [new ProfileController, 'show'], 'profile', 'admin');
+$router->get('/blog/edit-post',  [new EditPostController, 'edit'], 'newPost', 'admin');
+$router->post('/blog/edit-post',  [new EditPostController, 'edit'], 'newPost', 'admin');
+$router->get('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'editPost', 'admin');
+$router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'editPost', 'admin');
+$router->get('/blog/delete-post/:slug',  [new EditPostController, 'delete'], 'deletePost', 'admin');
+$router->get('/comment/:id/validate',  [new CommentController, 'validate'], 'validateComment', 'admin');
+$router->get('/comment/:id/delete',  [new CommentController, 'delete'], 'deletePost', 'admin');
 // end if logged
 
 
@@ -55,9 +53,6 @@ $router->get('/blog', [new BlogController, 'show']);
 $router->get('/blog/:slug',  [new PostController, 'show']);
 $router->post('/blog/:slug',  [new PostController, 'addComment']);
 $router->get('/mentions-legales', [new LegalNoticeController, 'show']);
-
-//$router->put();
-//$router->delete();
 
 try {
     $router->run();
