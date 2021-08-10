@@ -14,18 +14,21 @@ class Router {
         $this->url = $url;
     }
 
-    public function get($path, $callable, $name = null, $needAuthentication = false){
-        return $this->add($path, $callable, $name, 'GET', $needAuthentication);
+    public function get($path, $callable, $name = null, $login = null){
+        return $this->add($path, $callable, $name, 'GET', $login);
     }
 
-    public function post($path, $callable, $name = null, $needAuthentication = false){
-        return $this->add($path, $callable, $name, 'POST', $needAuthentication);
+    public function post($path, $callable, $name = null, $login = null){
+        return $this->add($path, $callable, $name, 'POST', $login);
     }
 
-    private function add($path, $callable, $name, $method, $needAuthentication = false){
+    private function add($path, $callable, $name, $method, $login){
+        $redirect = false;
+        if ($login == 'admin' && !isset($_SESSION['id'])) {
+            $redirect = true;
+        }
 
-        //var_dump($callable);
-        $route = new Route($path, $callable);
+        $route = new Route($path, $callable, $redirect);
         $this->routes[$method][] = $route;
         if(is_string($callable) && $name === null){
             $name = $callable;

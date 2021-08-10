@@ -29,35 +29,30 @@ session_start();
 
 $router = new Router($_GET['url']);
 
-$router->get('/', [new HomeController, 'show']);
+$router->get('/', [new HomeController, 'show'], 'home');
 
-$router->get('/contact', [new ContactController, 'show']);
-$router->post('/contact', [new ContactController, 'send']);
-$router->get('/login', [new LoginController, 'login']);
-$router->post('/login', [new LoginController, 'login']);
-$router->get('/logout', [new LogoutController, 'logout']);
+$router->get('/contact', [new ContactController, 'show'], 'contact');
+$router->post('/contact', [new ContactController, 'send'], 'contact');
+$router->get('/login', [new LoginController, 'login'], 'login');
+$router->post('/login', [new LoginController, 'login'], 'login');
+$router->get('/logout', [new LogoutController, 'logout'], 'logout');
 
-// if logged
-$router->get('/profile', [new ProfileController, 'show']);
-$router->get('/blog/edit-post',  [new EditPostController, 'edit']);
-$router->get('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'edit_post');
-$router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'edit_post');
-$router->get('/blog/delete-post/:slug',  [new EditPostController, 'delete'], 'delete_post');
-$router->post('/blog/edit-post',  [new EditPostController, 'edit']);
-$router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit']);
-$router->get('/comment/:id/validate',  [new CommentController, 'validate']);
-$router->get('/comment/:id/delete',  [new CommentController, 'delete']);
-//$router->get('/edit-post/:id', [new DashboardController, 'dashboard']);
+/* admin routes */
+$router->get('/profile', [new ProfileController, 'show'], 'profile', 'admin');
+$router->get('/blog/edit-post',  [new EditPostController, 'edit'], 'newPost', 'admin');
+$router->post('/blog/edit-post',  [new EditPostController, 'edit'], 'newPost', 'admin');
+$router->get('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'editPost', 'admin');
+$router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'editPost', 'admin');
+$router->get('/blog/delete-post/:slug',  [new EditPostController, 'delete'], 'deletePost', 'admin');
+$router->get('/comment/:id/validate',  [new CommentController, 'validate'], 'validateComment', 'admin');
+$router->get('/comment/:id/delete',  [new CommentController, 'delete'], 'deletePost', 'admin');
 // end if logged
 
 
-$router->get('/blog', [new BlogController, 'show']);
-$router->get('/blog/:slug',  [new PostController, 'show']);
-$router->post('/blog/:slug',  [new PostController, 'addComment']);
-$router->get('/mentions-legales', [new LegalNoticeController, 'show']);
-
-//$router->put();
-//$router->delete();
+$router->get('/blog', [new BlogController, 'show'], 'blog');
+$router->get('/blog/:slug',  [new PostController, 'show'], 'blogPost');
+$router->post('/blog/:slug',  [new PostController, 'addComment'], 'blogPost');
+$router->get('/mentions-legales', [new LegalNoticeController, 'show'], 'legalNotice');
 
 try {
     $router->run();
