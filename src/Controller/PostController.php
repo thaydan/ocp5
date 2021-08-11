@@ -30,13 +30,17 @@ class PostController extends AController
         if(Auth::isConnected()) {
             $comments = $commentRepository->findBy([
                 'id_post' => $post->id
-            ]);
+            ],
+                'datetime DESC'
+            );
         }
         else {
             $comments = $commentRepository->findBy([
                 'id_post' => $post->id,
                 'validated' => 1
-            ]);
+            ],
+                'datetime DESC'
+            );
         }
 
         $formAddComment = new Form(
