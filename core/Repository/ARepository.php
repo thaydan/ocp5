@@ -35,10 +35,11 @@ abstract class ARepository
         );
     }
 
-    public function findBy(array $filters): array
+    public function findBy(array $filters, string $orderBy = null): array
     {
+        $orderBy = ($orderBy) ? ' ORDER BY ' . $orderBy : $orderBy;
         return Database::getInstance()->query(
-            $this->createSelectQueryWithFilters($filters),
+            $this->createSelectQueryWithFilters($filters). $orderBy,
             $filters,
             $this->getEntityClassName()
         );
