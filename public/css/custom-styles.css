@@ -30,12 +30,16 @@
     padding-bottom: 3px;
 }
 
-.masthead.admin-header-displayed {
-    padding-top: 158px;
+.masthead {
+    padding-top: 104px;
     padding-bottom: 0;
 }
 
-.masthead.admin-header-displayed div.container {
+.masthead.admin-header-displayed {
+    padding-top: 158px;
+}
+
+.masthead div.container {
     position: relative;
     padding-top: 6rem;
     padding-bottom: 6rem;
@@ -85,12 +89,15 @@
 /* end edit post page */
 
 @media (max-width: 992px) {
-    .masthead.admin-header-displayed {
-        padding-top: 129px;
-        padding-bottom: 0;
+    .masthead {
+        padding-top: 75px;
     }
 
-    .masthead.admin-header-displayed div.container {
+    .masthead.admin-header-displayed {
+        padding-top: 129px;
+    }
+
+    .masthead div.container {
         padding-top: 4rem;
         padding-bottom: 4rem;
     }

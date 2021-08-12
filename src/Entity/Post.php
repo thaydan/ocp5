@@ -10,6 +10,7 @@ class Post implements IPost
 {
     private ?string $posts;
     private ?string $post;
+    public ?array $author;
 
     /**
      * @return string|null

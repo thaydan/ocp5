@@ -21,6 +21,10 @@
     </header>
 
     <section class="page-section">
+        <div class="container mb-5">
+            <div>Mis à jour le : {{ post.updated_datetime|date('d-m-Y') }}</div>
+            <div>Publié par : {{ post.author.first_name }}</div>
+        </div>
         <div class="container">
             {{ post.content|raw }}
         </div>
