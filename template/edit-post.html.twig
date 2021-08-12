@@ -32,6 +32,11 @@
     </header>
 
     <section class="page-section portfolio">
+        <div class="container mb-5">
+            <div>Créé le : {{ post.created_datetime|date('d-m-Y \\à H\\hi') }}</div>
+            <div>Mis à jour le : {{ post.updated_datetime|date('d-m-Y \\à H\\hi') }}</div>
+            <div>Publié par : {{ post.author.first_name }}</div>
+        </div>
         <div class="container mb-2">
             <p class="dfree-slug">
                 {{ post.slug|raw }}

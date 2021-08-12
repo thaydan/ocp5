@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Repository\PostRepository;
+use App\Repository\UserRepository;
 use Core\Controller\AController;
 use App\Entity\Post;
+use Core\Security\Auth;
 
 class EditPostController extends AController
 {
@@ -30,8 +32,8 @@ class EditPostController extends AController
         $postRepository = new PostRepository();
 
         if ($_POST) {
-            var_dump($_POST, $_FILES);
-            die();
+            /*var_dump($_POST, $_FILES);
+            die();*/
 
             /* if($_FILES['featured-image']) {
                 var_dump($_FILES);
@@ -46,7 +48,8 @@ class EditPostController extends AController
                 $book->setCoverFilename($filename);
             }*/
 
-            $_POST['published_date'] = date("Y-m-d H:i:s");
+            $_POST['updated_datetime'] = date("Y-m-d H:i:s");
+            $_POST['author_id'] = Auth::getUser()->getID();
 
             $_POST['slug'] = trim($_POST['slug']);
             if (!($_POST['slug'])) {
@@ -66,6 +69,9 @@ class EditPostController extends AController
         if ($slug) {
             $post = $postRepository->findOneBy(['slug' => $slug]);
             if (!$post) throw new \Exception('Aucun article ne correspond à cet identifiant');
+
+            $userRepo = new UserRepository();
+            $post->author = (array)$userRepo->find($post->author_id, ['id', 'first_name']);
             $headTitle = $post->title . ' - Romain Royer';
         }
 

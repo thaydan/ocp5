@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
+use App\Repository\UserRepository;
 use Core\Controller\AController;
 use Core\Form\Constraint\NotBlankConstraint;
 use Core\Form\Constraint\NotNullConstraint;
@@ -25,6 +26,8 @@ class PostController extends AController
             throw new \Exception('Aucun article ne correspond à cet identifiant');
         }
 
+        $userRepo = new UserRepository();
+        $post->author = (array)$userRepo->find($post->author_id, ['id', 'first_name']);
 
         $commentRepository = new CommentRepository();
         if(Auth::isConnected()) {

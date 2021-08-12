@@ -15,7 +15,7 @@ class Authenticator implements IAuthenticator
     {
         // TO DO recup en bdd
 
-        return (new User())->setUsername($username)->setPassword(password_hash('azerty', PASSWORD_DEFAULT));
+        return (new User())->setID(1)->setUsername($username)->setPassword(password_hash('azerty', PASSWORD_DEFAULT));
     }
 
     public function checkPassword(IUser $user, string $password): bool

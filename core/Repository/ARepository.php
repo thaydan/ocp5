@@ -25,10 +25,15 @@ abstract class ARepository
         );
     }
 
-    public function find(int $id)
+    /**
+     * @param int $id
+     * @param array|null $selectedColumns
+     * @return array|false|mixed
+     */
+    public function find(int $id, array $selectedColumns = null)
     {
         return Database::getInstance()->query(
-            'SELECT * FROM ' . $this->getTableName() . ' WHERE id=:id',
+            'SELECT '. $this->createSelectedColumnsInQuery($selectedColumns) .' FROM ' . $this->getTableName() . ' WHERE id=:id',
             ['id' => $id],
             $this->getEntityClassName(),
             true
@@ -53,6 +58,11 @@ abstract class ARepository
             $this->getEntityClassName(),
             true
         );
+    }
+
+    public function createSelectedColumnsInQuery(array $columns = null)
+    {
+        return (!$columns) ? '*' : implode(',', $columns);
     }
 
     /**
