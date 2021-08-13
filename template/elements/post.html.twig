@@ -1,0 +1,10 @@
+<div class="col-md-6 col-lg-4 mb-5">
+    <div class="post-item mx-auto" data-toggle="modal">
+        <a href="/blog/{{ data.slug }}">
+            <img class="img-fluid" src="{{ (data.featured_image)?: '/assets/img/no-image.jpg' }}" alt="..."/>
+            <div class="title mt-1"><b>{{ data.title|capitalize }}</b></div>
+            <div>{{ data.description|capitalize }}</div>
+            <div>Mis à jour le {{ post.updated_datetime|date('d/m/Y') }}</div>
+        </a>
+    </div>
+</div>

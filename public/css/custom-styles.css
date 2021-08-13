@@ -88,6 +88,20 @@
 }
 /* end edit post page */
 
+/* post item */
+.post-item a:hover{
+    text-decoration: inherit;
+}
+.post-item .img-fluid{
+    border-radius: 8px;
+}
+
+.post-item a:hover .title{
+    color: #117964;
+    text-decoration: underline;
+}
+/* end post iten */
+
 @media (max-width: 992px) {
     .masthead {
         padding-top: 75px;
