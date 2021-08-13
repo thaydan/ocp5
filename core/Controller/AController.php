@@ -88,6 +88,22 @@ abstract class AController
             )
         );
 
+
+
+        $twig->addFunction(
+            new TwigFunction(
+                'element',
+                function ($name, $data) use ($twig) {
+                    $twig->display(
+                        'elements/' . $name . '.html.twig',
+                        [
+                            'data' => $data
+                        ]
+                    );
+                }
+            )
+        );
+
         echo $twig->render($name, $context);
     }
 
