@@ -11,6 +11,7 @@ class Post implements IPost
     private ?string $posts;
     private ?string $post;
     public ?array $author;
+    public ?string $featured_image;
 
     /**
      * @return string|null
@@ -23,15 +24,5 @@ class Post implements IPost
     public function getPost(): ?string
     {
         return $this->post;
-    }
-
-    public function sanitize(): void
-    {
-        $this->password = null;
-    }
-
-    public function getPassword(): ?string
-    {
-        // TODO: Implement getPassword() method.
     }
 }

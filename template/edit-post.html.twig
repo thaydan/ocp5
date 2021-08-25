@@ -18,7 +18,6 @@
     <header class="masthead {{ adminHeaderDisplayedClass }} bg-primary text-white text-center">
         <div id="featured-image-container" class="container d-flex align-items-center flex-column"
              style="background-image: url('{{ (post.featured_image)?: '/assets/img/no-image.jpg' }}')">
-            <img id="featured-image-container-2">
             <h1 class="dfree-title masthead-heading text-uppercase mb-0">{{ post.title }}</h1>
             {% include 'components/divider.html.twig' %}
             <p class="dfree-desc masthead-subheading font-weight-light mb-0">{{ post.description }}</p>
@@ -57,7 +56,6 @@
         let form = document.getElementById('form-edit-post');
         let imageInput = document.getElementById('image-input');
         let imagePreview = document.getElementById('featured-image-container');
-        let imagePreview2 = document.getElementById('featured-image-container-2');
         let defaultImage = imagePreview.style.backgroundImage;
         console.log(imageInput, defaultImage);
 
@@ -70,8 +68,6 @@
             let previewURL = URL.createObjectURL(imageInput.files[0]);
             console.log(previewURL);
             imagePreview.style.background = "url('" + previewURL + "')";
-            imagePreview2.src = previewURL;
-            console.log('222');
         });
 
         function save() {
