@@ -54,21 +54,34 @@
     right: 10px;
     display: none;
 }
-
 .masthead.admin-header-displayed div.container:hover #featured-image-selector {
     display: block;
 }
-
 #featured-image-selector i {
     font-size: 42px;
     cursor: pointer;
     padding: 6px;
 }
-
 #featured-image-selector input {
     display: none;
 }
 /* end file selector */
+
+
+/* featured-image-container */
+#featured-image-container .content {
+    z-index: 1;
+}
+#featured-image-container .filter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: #6161617a;
+}
+/* end featured-image-container */
+
 
 /* post page */
 .comment {
@@ -76,7 +89,6 @@
     padding: 10px;
     border-radius: 8px;
 }
-
 .comment.admin:hover {
     background: #f9f9f9;
 }

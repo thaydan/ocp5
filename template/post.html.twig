@@ -12,11 +12,15 @@
     {% endif %}
 
     <header class="masthead {{ adminHeaderDisplayedClass }} bg-primary text-white text-center">
-        <div class="container d-flex align-items-center flex-column"
+        <div id="featured-image-container" class="container d-flex align-items-center flex-column"
              style="background-image: url('{{ (post.featured_image)?: '/assets/img/no-image.jpg' }}')">
-            <h1 class="masthead-heading text-uppercase mb-0">{{ post.title }}</h1>
-            {% include 'components/divider.html.twig' %}
-            <p class="masthead-subheading font-weight-light mb-0">{{ post.description }}</p>
+            <div class="content">
+                <h1 class="masthead-heading text-uppercase mb-0">{{ post.title }}</h1>
+                {% include 'components/divider.html.twig' %}
+                <p class="masthead-subheading font-weight-light mb-0">{{ post.description }}</p>
+            </div>
+            <div class="filter">
+            </div>
         </div>
     </header>
 
