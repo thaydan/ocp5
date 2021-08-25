@@ -89,18 +89,23 @@
 /* end edit post page */
 
 /* post item */
+.post-item a{
+    color: #117964;
+}
 .post-item a:hover{
     text-decoration: inherit;
+    color: #608cce;
 }
 .post-item .img-fluid{
     border-radius: 8px;
 }
-
-.post-item a:hover .title{
-    color: #117964;
-    text-decoration: underline;
+.post-item .updated-date{
+    color: #117964a6;
 }
-/* end post iten */
+.post-item a:hover .updated-date{
+    color: #114e79a6;
+}
+/* end post item */
 
 @media (max-width: 992px) {
     .masthead {

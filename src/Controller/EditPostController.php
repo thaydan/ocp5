@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
+use App\Upload\Upload;
 use Core\Controller\AController;
 use App\Entity\Post;
 use Core\Security\Auth;
@@ -32,31 +33,30 @@ class EditPostController extends AController
         $postRepository = new PostRepository();
 
         if ($_POST) {
-            /*var_dump($_POST, $_FILES);
-            die();*/
-
-            /* if($_FILES['featured-image']) {
-                var_dump($_FILES);
-                $tmpName = $_FILES['featured-image']['tmp_name'];
-                $name = $_FILES['featured-image']['name'];
-                $size = $_FILES['featured-image']['size'];
-                $error = $_FILES['featured-image']['error'];
-                $targetDir = "uploads/";
-                $filename = $book->getCoverFile()->getFilename();
-                $targetFile = $targetDir . uniqid() . '-' . basename($filename);
-                $book->getCoverFile()->moveTo($targetFile);
-                $book->setCoverFilename($filename);
-            }*/
-
+            // set update date and author
             $_POST['updated_datetime'] = date("Y-m-d H:i:s");
             $_POST['author_id'] = Auth::getUser()->getID();
 
+            // check slug
             $_POST['slug'] = trim($_POST['slug']);
             if (!($_POST['slug'])) {
                 $_POST['slug'] = $this->slugify($_POST['title']);
             }
 
             $post = $postRepository->findOneBy(['id' => $_POST['id']]);
+
+            // upload image
+            if($_FILES['featured-image']['size']) {
+                $upload = new Upload();
+                $upload->setFile($_FILES['featured-image']);
+                $uploaded = $upload->run($_POST['slug']);
+                if($uploaded) {
+                    if($post) $upload->removeFile($post->featured_image);
+                    $_POST['featured_image'] = $upload->getTargetFile();
+                }
+            }
+
+            // save post
             if ($post) {
                 $postRepository->edit($_POST);
             } else {
