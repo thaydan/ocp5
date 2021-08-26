@@ -1,8 +1,8 @@
-{% if (comments) %}
+{% if (data) %}
     <p class="font-italic mb-4">Du plus récent au plus ancien</p>
     <div>
-        {% for comment in comments %}
-            {% include 'comments/comment.html.twig' with {'comment': comment} only %}
+        {% for comment in data %}
+            {{ element('comment', comment) }}
         {% endfor %}
     </div>
 {% else %}

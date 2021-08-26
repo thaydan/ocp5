@@ -46,20 +46,6 @@ abstract class AController
 
         $twig->addFunction(
             new TwigFunction(
-                'showComments',
-                function ($comments) use ($twig) {
-                    $twig->display(
-                        'comments/comments.html.twig',
-                        [
-                            'comments' => $comments
-                        ]
-                    );
-                }
-            )
-        );
-
-        $twig->addFunction(
-            new TwigFunction(
                 'className',
                 function ($object) {
                     $fullClassName = get_class($object);

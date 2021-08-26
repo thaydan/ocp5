@@ -3,19 +3,34 @@
 {% block contenuPrincipal %}
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
-            <h1 class="masthead-heading text-uppercase mb-0">Votre profil</h1>
+            <h1 class="masthead-heading text-uppercase mb-0">Bonjour {{ app.user.username }}</h1>
             {% include 'components/divider.html.twig' %}
-            <p class="masthead-subheading font-weight-light mb-0">Réglez ici les paramètres de votre profil et du site</p>
+            <p class="masthead-subheading font-weight-light mb-0">Réglez ici les paramètres de votre profil et du
+                site</p>
         </div>
     </header>
 
     <section class="page-section">
         <div class="container">
+                <h2>Commentaires non validés</h2>
+            {{ element('comments', comments) }}
+
+        </div>
+        <div class="container mt-5">
             <div class="row">
-                <div class="col-lg-8 mx-auto">
-                    <p>Votre profil</p>
+                <div class="col">
+                    <h2>Modifier votre mot de passe</h2>
+                    {{ form(formNewPassword) }}
+                </div>
+                <div class="col">
+                    <h2>Ajouter un administrateur</h2>
+                    {{ form(formNewAdmin) }}
                 </div>
             </div>
+        </div>
+        <div class="container">
+            <h2>Administrateurs</h2>
+            {{ element('users', users) }}
         </div>
     </section>
 {% endblock %}

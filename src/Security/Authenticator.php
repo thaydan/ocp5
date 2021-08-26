@@ -5,6 +5,7 @@ namespace App\Security;
 
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Core\Entity\IUser;
 use Core\Security\IAuthenticator;
 
@@ -13,9 +14,13 @@ class Authenticator implements IAuthenticator
 
     public function getUser($username): ?IUser
     {
-        // TO DO recup en bdd
+        $userRepo = new UserRepository();
+        $user = $userRepo->findOneBy(['username' => $username]);
 
-        return (new User())->setID(1)->setUsername($username)->setPassword(password_hash('azerty', PASSWORD_DEFAULT));
+        if($user) {
+            return (new User())->setID($user->getID())->setUsername($user->getUsername())->setPassword($user->getPassword());
+        }
+        return null;
     }
 
     public function checkPassword(IUser $user, string $password): bool
