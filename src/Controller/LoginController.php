@@ -6,6 +6,7 @@ use Core\Controller\AController;
 use Core\Form\Constraint\NotBlankConstraint;
 use Core\Form\Constraint\NotNullConstraint;
 use Core\Form\Form;
+use Core\Form\Type\HiddenType;
 use Core\Form\Type\PasswordType;
 use Core\Form\Type\SubmitType;
 use Core\Form\Type\TextType;
@@ -18,7 +19,7 @@ class LoginController extends AController
     {
         $formLogin = new Form(
             [
-                'id' => new TextType(
+                'email' => new TextType(
                     [
                         new NotNullConstraint(),
                         new NotBlankConstraint()
@@ -27,7 +28,7 @@ class LoginController extends AController
                         'label' => 'Identifiant'
                     ]
                 ),
-                'password' => new PasswordType(
+                'password' => new HiddenType(
                     [
                         new NotNullConstraint(),
                         new NotBlankConstraint()
@@ -51,7 +52,7 @@ class LoginController extends AController
             if ($formLogin) {
                 $datas = $formLogin->getData();
             }
-            Auth::login($datas['id'], $datas['password']);
+            Auth::login($datas['email'], $datas['password']);
         }
 
         if (Auth::isConnected()) {

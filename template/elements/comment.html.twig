@@ -1,0 +1,16 @@
+<div class="comment {{ (app.connected) ? 'admin' }} mb-4 d-flex align-items-center">
+    <div{{ (data.validated != 1) ? ' class="text-grey"' }}>
+        <div><b>{{ comment.author_name }}</b></div>
+        <div>{{ data.comment }}</div>
+    </div>
+    {% if app.connected %}
+        <div class="ml-auto">
+            {% if data.validated %}
+                <a href="/comment/{{ data.id }}/delete"><i class="material-icons-outlined">delete</i></a>
+            {% else %}
+                <a href="/comment/{{ data.id }}/validate"><i class="material-icons-outlined">done</i></a>
+                <a class="ml-2" href="/comment/{{ data.id }}/delete"><i class="material-icons-outlined">delete</i></a>
+            {% endif %}
+        </div>
+    {% endif %}
+</div>

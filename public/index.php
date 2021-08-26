@@ -39,6 +39,8 @@ $router->get('/logout', [new LogoutController, 'logout'], 'logout');
 
 /* admin routes */
 $router->get('/profile', [new ProfileController, 'show'], 'profile', 'admin');
+$router->post('/profile', [new ProfileController, 'show'], 'profile', 'admin');
+$router->get('/user/:id/delete', [new ProfileController, 'deleteUser'], 'deleteUser', 'admin');
 $router->get('/blog/edit-post',  [new EditPostController, 'edit'], 'newPost', 'admin');
 $router->post('/blog/edit-post',  [new EditPostController, 'edit'], 'newPost', 'admin');
 $router->get('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'editPost', 'admin');
