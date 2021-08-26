@@ -47,6 +47,12 @@
     background-position: center;
 }
 
+/* form */
+form.bigger .floating-label-form-group input, form.bigger .floating-label-form-group textarea {
+    font-size: 1.5rem;
+}
+/* end form */
+
 /* file selector */
 #featured-image-selector {
     position: absolute;
