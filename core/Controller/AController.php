@@ -77,17 +77,21 @@ abstract class AController
              * @throws RuntimeError
              * @throws SyntaxError
              */ 'form',
-                function (Form $form) use ($twig) {
+                function (Form $form, $bigger = false) use ($twig) {
+                    $biggerClass = null;
+                    if ($bigger) {
+                        $biggerClass = ' class="bigger" ';
+                    }
                     $twig->display(
                         'form/form.html.twig',
                         [
-                            'form' => $form
+                            'form' => $form,
+                            'biggerClass' => $biggerClass
                         ]
                     );
                 }
             )
         );
-
 
 
         $twig->addFunction(

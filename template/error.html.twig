@@ -1,8 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block contenuPrincipal %}
-    <h1>{{ errorMsg }}</h1>
-
     <header class="masthead bg-primary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
             <h1 class="masthead-heading text-uppercase mb-0">Erreur 404</h1>
@@ -15,7 +13,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto">
-                    {{ errorMsg }}
+                    {{ error|raw }}
                 </div>
             </div>
         </div>

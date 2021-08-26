@@ -67,6 +67,10 @@ class Upload extends AController
 
     public function removeFile($filename)
     {
-        unlink(substr($filename, 1));
+        $unlinked = @unlink(substr($filename, 1));
+        if($unlinked){
+            return true;
+        }
+        return false;
     }
 }

@@ -70,7 +70,6 @@
             }
 
             let previewURL = URL.createObjectURL(imageInput.files[0]);
-            console.log(previewURL);
             imagePreview.style.backgroundImage = "url('" + previewURL + "')";
         });
 
@@ -99,12 +98,6 @@
             document.body.appendChild(form);
 
             form.submit();
-        }
-
-        function deletePost(slug) {
-            if (confirm("Confirmer la suppression ?")) {
-                window.location.href = "/blog/delete-post/" + slug;
-            }
         }
     </script>
 {% endblock %}

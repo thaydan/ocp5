@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use App\Upload\Upload;
@@ -39,8 +40,13 @@ class EditPostController extends AController
 
             // check slug
             $_POST['slug'] = trim($_POST['slug']);
-            if (!($_POST['slug'])) {
+            if (!$_POST['slug']) {
                 $_POST['slug'] = $this->slugify($_POST['title']);
+            }
+            $postsWithSameSlug = $postRepository->findBy(['slug' => $_POST['slug']]);
+            while ($postsWithSameSlug) {
+                $_POST['slug'] .= '-1';
+                $postsWithSameSlug = $postRepository->findBy(['slug' => $_POST['slug']]);
             }
 
             $post = $postRepository->findOneBy(['id' => $_POST['id']]);
@@ -84,6 +90,24 @@ class EditPostController extends AController
     public function delete($slug)
     {
         $postRepository = new PostRepository();
+        $post = $postRepository->findOneBy(['slug' => $slug]);
+
+        /* remove image file */
+        if($post->featured_image) {
+            $upload = new Upload();
+            $removed = $upload->removeFile($post->featured_image);
+            if(!$removed) {
+                throw new \Exception("Une erreur est survenue lors de la suppression de l'image lié à cet article.<br>La suppression de l'article est annulée");
+            }
+        }
+
+        /* remove comment */
+        $commentRepository = new CommentRepository();
+        $comments = $commentRepository->findBy(['id_post' => $post->id]);
+        foreach ($comments as $comment) {
+            $commentRepository->delete($comment->id);
+        }
+
         $postRepository->deleteBySlug($slug);
         $this->redirect('/blog');
     }

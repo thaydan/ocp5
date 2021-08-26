@@ -2,15 +2,19 @@
 
 {% set adminHeader %}
     <span class="font-weight-bold">Mode administrateur</span>
-    <div class="ml-auto"><a class="btn btn-outline-light border-0" href="/blog/edit-post/{{ post.slug }}"><i
-                    class="material-icons-outlined">edit</i></a></div>
+    <div class="ml-auto">
+        <a class="btn btn-outline-light border-0" href="/blog/edit-post/{{ post.slug }}">
+            <i class="material-icons-outlined">edit</i></a>
+        <a class="btn btn-outline-light border-0" href="#" onclick="deletePost('{{ post.slug }}')">
+            <i class="material-icons-outlined">delete</i></a>
+    </div>
+
 {% endset %}
 
 {% block contenuPrincipal %}
     {% if app.connected %}
         {% set adminHeaderDisplayedClass = 'admin-header-displayed' %}
     {% endif %}
-
     <header class="masthead {{ adminHeaderDisplayedClass }} bg-primary text-white text-center">
         <div id="featured-image-container" class="container d-flex align-items-center flex-column"
              style="background-image: url('{{ (post.featured_image)?: '/assets/img/no-image.jpg' }}')">
@@ -42,7 +46,7 @@
             </div>
             <div class="my-5">
                 <h5>Ajouter un commentaire</h5>
-                {{ form(formAddComment) }}
+                <div>{{ form(formAddComment) }}</div>
             </div>
         </div>
     </section>
