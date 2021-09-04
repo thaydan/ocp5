@@ -16,6 +16,8 @@ use App\Controller\ProfileController;
 
 require '../vendor/autoload.php';
 
+$_GET = filter_input_array(INPUT_GET);
+$_POST = filter_input_array(INPUT_POST);
 
 $envFiles = ['../.env'];
 if (file_exists('../.env.local')) {

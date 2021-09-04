@@ -10,7 +10,6 @@ class Route
     private $path;
     private $callable;
     private $matches = [];
-    private $params = [];
     public $redirect;
 
     public function __construct($path, $callable, $redirect = null)

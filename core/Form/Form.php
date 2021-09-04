@@ -41,7 +41,7 @@ class Form
          * @var string $name
          * @var AFormType $type
          */
-        foreach ($this->parts as $name => $type) {
+        foreach ($this->parts as $type) {
             $this->isValid &= $type->isValid();
         }
 
