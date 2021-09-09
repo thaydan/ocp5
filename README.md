@@ -1,6 +1,6 @@
 # ocp5
 
-OCP5 is a open source blog build in PHP.
+ocp5 is a open source blog build in PHP.
 
 ## Installation
 1. Download project files.
