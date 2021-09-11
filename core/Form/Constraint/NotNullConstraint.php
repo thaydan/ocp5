@@ -4,7 +4,7 @@ namespace Core\Form\Constraint;
 
 class NotNullConstraint extends AConstraint
 {
-    public function __construct($errorMessage = 'La valeur ne doit pas être null.')
+    public function __construct($errorMessage = 'La valeur ne doit pas être nulle.')
     {
         parent::__construct($errorMessage);
     }

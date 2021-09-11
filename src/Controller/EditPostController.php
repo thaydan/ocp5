@@ -5,10 +5,10 @@ namespace App\Controller;
 use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
-use App\Upload\Upload;
 use Core\Controller\AController;
 use App\Entity\Post;
 use Core\Security\Auth;
+use Core\Upload\Upload;
 
 class EditPostController extends AController
 {
@@ -57,7 +57,7 @@ class EditPostController extends AController
                 $upload->setFile($_FILES['featured-image']);
                 $uploaded = $upload->run($_POST['slug']);
                 if($uploaded) {
-                    if($post) $upload->removeFile($post->featured_image);
+                    if($post) $upload->removeFile($post->featured_image); // if
                     $_POST['featured_image'] = $upload->getTargetFile();
                 }
             }

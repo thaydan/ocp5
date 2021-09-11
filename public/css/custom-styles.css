@@ -4,6 +4,14 @@
     -webkit-transform-origin-x: center;
 }
 
+.not-allowed {
+    cursor: not-allowed;
+}
+.not-allowed * {
+    pointer-events: none;
+    opacity: 0.65;
+}
+
 .text-grey {
     color: #bfbfbf;
 }
@@ -13,7 +21,7 @@
 }
 
 .material-icons-outlined {
-    vertical-align: inherit;
+    vertical-align: middle;
 }
 
 #mainNav img.profile {

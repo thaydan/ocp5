@@ -1,4 +1,4 @@
-<form method="POST" {{ biggerClass|raw }}>
+<form method="POST" {{ biggerClass|raw }} action="{{ action }}">
     {% for partName,partForm in form.parts %}
         {% include 'form/'~className(partForm)~'.html.twig' with {'name': partName, 'formType': partForm} only %}
     {% endfor %}

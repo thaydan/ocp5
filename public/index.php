@@ -49,7 +49,7 @@ $router->get('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'editPo
 $router->post('/blog/edit-post/:slug',  [new EditPostController, 'edit'], 'editPost', 'admin');
 $router->get('/blog/delete-post/:slug',  [new EditPostController, 'delete'], 'deletePost', 'admin');
 $router->get('/comment/:id/validate',  [new CommentController, 'validate'], 'validateComment', 'admin');
-$router->get('/comment/:id/delete',  [new CommentController, 'delete'], 'deletePost', 'admin');
+$router->get('/comment/:id/delete',  [new CommentController, 'delete'], 'deleteComment', 'admin');
 // end if logged
 
 

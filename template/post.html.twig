@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% set adminHeader %}
-    <span class="font-weight-bold">Mode administrateur</span>
+    <a class="btn btn-outline-light border-0" href="/blog" title="Retour au blog">
+        <i class="material-icons-outlined">arrow_back</i></a>
+    <span class="font-weight-bold ml-4">Mode lecture</span>
     <div class="ml-auto">
-        <a class="btn btn-outline-light border-0" href="/blog/edit-post/{{ post.slug }}">
+        <a class="btn btn-outline-light border-0" href="/blog/edit-post/{{ post.slug }}" title="Editer">
             <i class="material-icons-outlined">edit</i></a>
-        <a class="btn btn-outline-light border-0" href="#" onclick="deletePost('{{ post.slug }}')">
+        <a class="btn btn-outline-light border-0" href="#" onclick="deletePost('{{ post.slug }}')" title="Supprimer">
             <i class="material-icons-outlined">delete</i></a>
     </div>
 
