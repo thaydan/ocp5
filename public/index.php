@@ -29,6 +29,9 @@ $dotenv->load(...$envFiles);
 
 session_start();
 
+$_SESSION['last-route'] = $_SESSION['current-route'];
+$_SESSION['current-route'] = $_GET['url'];
+
 $router = new Router($_GET['url']);
 
 $router->get('/', [new HomeController, 'show'], 'home');

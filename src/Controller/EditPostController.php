@@ -101,7 +101,7 @@ class EditPostController extends AController
             }
         }
 
-        /* remove comment */
+        /* remove comments */
         $commentRepository = new CommentRepository();
         $comments = $commentRepository->findBy(['id_post' => $post->id]);
         foreach ($comments as $comment) {

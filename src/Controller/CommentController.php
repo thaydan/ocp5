@@ -9,30 +9,21 @@ use Core\Controller\AController;
 class CommentController extends AController
 {
     public function validate($id) {
-        $commentRepository = new CommentRepository();
-        $comment = $commentRepository->find($id);
-
         $data = [
             'id' => $id,
             'validated' => 1
         ];
+
+        $commentRepository = new CommentRepository();
         $commentRepository->edit($data);
 
-        $postRepository = new PostRepository();
-        $post = $postRepository->find($comment->id_post);
-
-        $this->redirect('/blog/'. $post->slug);
+        $this->redirect('/' . $_SESSION['last-route']);
     }
 
     public function delete($id) {
         $commentRepository = new CommentRepository();
-        $comment = $commentRepository->find($id);
-
-        $postRepository = new PostRepository();
-        $post = $postRepository->find($comment->id_post);
-
         $commentRepository->delete($id);
 
-        $this->redirect('/blog/'. $post->slug);
+        $this->redirect('/' . $_SESSION['last-route']);
     }
 }

@@ -6,8 +6,8 @@
     <span class="font-weight-bold ml-4">Mode édition</span>
     <div class="ml-auto"><a class="btn btn-outline-light border-0" href="#" onclick="save()" title="Sauvegarder"><i
                     class="material-icons-outlined">done</i></a></div>
-    <div class="ml-1"><a class="btn btn-outline-light border-0" href="#" onclick="deletePost('{{ post.slug }}')" title="Supprimer"><i
-                    class="material-icons-outlined">delete</i></a></div>
+    <a class="btn btn-outline-light border-0" href="/blog/delete-post/{{ post.slug }}" onclick="deletePost(event, '{{ post.slug }}')" title="Supprimer">
+        <i class="material-icons-outlined">delete</i></a>
 {% endset %}
 
 {% block contenuPrincipal %}

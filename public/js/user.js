@@ -3,5 +3,4 @@ function deleteUser(e, id) {
     if (confirm("Confirmer la suppression ?")) {
         window.location.href = "/user/"+ id +"/delete";
     }
-    return false;
 }

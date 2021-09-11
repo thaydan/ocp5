@@ -7,7 +7,7 @@
     <div class="ml-auto">
         <a class="btn btn-outline-light border-0" href="/blog/edit-post/{{ post.slug }}" title="Editer">
             <i class="material-icons-outlined">edit</i></a>
-        <a class="btn btn-outline-light border-0" href="#" onclick="deletePost('{{ post.slug }}')" title="Supprimer">
+        <a class="btn btn-outline-light border-0" href="/blog/delete-post/{{ post.slug }}" onclick="deletePost(event, '{{ post.slug }}')" title="Supprimer">
             <i class="material-icons-outlined">delete</i></a>
     </div>
 
