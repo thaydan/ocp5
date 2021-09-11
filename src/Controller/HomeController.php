@@ -19,59 +19,13 @@ class HomeController extends AController
      */
     public function show()
     {
-        $formContact = new Form(
-            [
-                'name' => new TextType(
-                    [
-                        new NotNullConstraint(),
-                        new NotBlankConstraint()
-                    ],
-                    [
-                        'label' => 'Nom'
-                    ]
-                ),
-                'email' => new TextType(
-                    [
-                        new NotNullConstraint(),
-                        new NotBlankConstraint()
-                    ],
-                    [
-                        'label' => 'Adresse e-mail'
-                    ]
-                ),
-                'phone' => new TextType(
-                    [
-                        new NotNullConstraint(),
-                        new NotBlankConstraint()
-                    ],
-                    [
-                        'label' => 'Téléphone'
-                    ]
-                ),
-                'message' => new TextAreaType(
-                    [
-                        new NotNullConstraint(),
-                        new NotBlankConstraint()
-                    ],
-                    [
-                        'label' => 'Message'
-                    ]
-                ),
-                'submit' => new SubmitType(
-                    [],
-                    [
-                        'label' => 'Envoyer'
-                    ]
-                )
-            ]
-        );
-
-        $formContact->handleRequest();
+        $contactController = new ContactController();
+        $formContact = $contactController->newContactForm();
 
         $headTitle = 'Romain Royer';
 
         $postRepository = new PostRepository();
-        $posts = $postRepository->findAll();        // AJOUTER LIMIT 6 POSTS
+        $posts = $postRepository->findAll(6);        // AJOUTER LIMIT 6 POSTS
 
         $this->render('home.html.twig', [
             'headTitle' => $headTitle,

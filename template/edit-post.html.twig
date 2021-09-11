@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% set adminHeader %}
-    <span><a class="btn btn-outline-light border-0" href="/blog/{{ post.slug }}"><i
-                    class="fas fa-arrow-left"></i></a></span>
-    <span class="font-weight-bold ml-4">Edition du post</span>
-    <div class="ml-auto"><a class="btn btn-outline-light border-0" href="#" onclick="save()"><i
+    <a class="btn btn-outline-light border-0" href="/blog/{{ post.slug }}" title="Retour en mode visionnage">
+        <i class="material-icons-outlined">arrow_back</i></a>
+    <span class="font-weight-bold ml-4">Mode édition</span>
+    <div class="ml-auto"><a class="btn btn-outline-light border-0" href="#" onclick="save()" title="Sauvegarder"><i
                     class="material-icons-outlined">done</i></a></div>
-    <div class="ml-1"><a class="btn btn-outline-light border-0" href="#" onclick="deletePost('{{ post.slug }}')"><i
+    <div class="ml-1"><a class="btn btn-outline-light border-0" href="#" onclick="deletePost('{{ post.slug }}')" title="Supprimer"><i
                     class="material-icons-outlined">delete</i></a></div>
 {% endset %}
 
@@ -35,12 +35,13 @@
     </header>
 
     <section class="page-section portfolio">
-        <div class="container mb-5">
+        <div class="container mb-4">
             <div>Créé le : {{ post.created_datetime|date('d-m-Y \\à H\\hi') }}</div>
             <div>Mis à jour le : {{ post.updated_datetime|date('d-m-Y \\à H\\hi') }}</div>
             <div>Publié par : {{ post.author.first_name }}</div>
         </div>
-        <div class="container mb-2">
+        <div class="container mb-4">
+            <div>Slug :</div>
             <p class="dfree-slug">
                 {{ post.slug|raw }}
             </p>

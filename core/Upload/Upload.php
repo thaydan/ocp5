@@ -1,16 +1,20 @@
 <?php
 
-namespace App\Upload;
+namespace Core\Upload;
 
 use Core\Controller\AController;
-use mysql_xdevapi\Exception;
 
 class Upload extends AController
 {
     private array $selectedFile;
-    private string $targetDir = 'upload/';
+    private string $targetDir;
     private string $targetFile;
     private ?string $errorMsg = null;
+
+    public function __construct()
+    {
+        $this->targetDir = $_ENV['UPLOAD_TARGET_DIR'];
+    }
 
     public function setFile($file)
     {

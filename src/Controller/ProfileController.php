@@ -140,6 +140,11 @@ class ProfileController extends AController
         if ($formNewAdmin->isSubmitted() && $formNewAdmin->isValid()) {
             $datas = $formNewAdmin->getData();
 
+            $userExistWithUsername = $userRepository->findOneBy(['username' => $datas['username']]);
+            $userExistWithEmail = $userRepository->findOneBy(['email' => $datas['email']]);
+            if($userExistWithUsername) throw new \Exception('Ce pseudo est déjà utilisé.');
+            if($userExistWithEmail) throw new \Exception('Cette adresse e-mail est déjà utilisée.');
+
             $userRepository->add([
                 'username' => $datas['username'],
                 'first_name' => $datas['firstName'],
@@ -168,6 +173,8 @@ class ProfileController extends AController
 
     public function deleteUser($id)
     {
+        if($id == Auth::getUser()->getID()) throw new \Exception('Vous ne pouvez pas supprimer l\'utilisateur de la session en cours.');
+
         $userRepo = new UserRepository();
         $userRepo->delete($id);
 

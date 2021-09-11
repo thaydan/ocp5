@@ -1,10 +1,12 @@
-<div class="row">
+<div class="row align-items-center">
     <div class="col">{{ data.username }}</div>
     <div class="col">{{ data.first_name }} {{ data.last_name }}</div>
     <div class="col">{{ data.email }}</div>
-    {% if app.user.id != data.id %}
+    {% set deleteDisabledClass = (app.user.id == data.id) ? 'not-allowed' %}
     <div class="ml-auto">
-        <a href="/user/{{ data.id }}/delete" ><i class="material-icons-outlined">delete</i></a>
+        <div class="{{ deleteDisabledClass }}">
+            <a href="#" class="btn" onclick="deleteUser(event, {{ data.id }})"><i
+                        class="material-icons-outlined">delete</i></a>
+        </div>
     </div>
-    {% endif %}
 </div>
