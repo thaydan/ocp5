@@ -16,10 +16,15 @@ abstract class ARepository
         return $this->toSnakeCase($explode[count($explode) - 1]);
     }
 
-    public function findAll(): array
+    /**
+     * @param string|null $limit
+     * @return array
+     */
+    public function findAll(string $limit = null): array
     {
+        $limit = ($limit) ? ' LIMIT ' . $limit : $limit;
         return Database::getInstance()->query(
-            'SELECT * FROM ' . $this->getTableName(),
+            'SELECT * FROM ' . $this->getTableName() . $limit,
             [],
             $this->getEntityClassName()
         );

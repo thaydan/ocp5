@@ -25,7 +25,7 @@ class HomeController extends AController
         $headTitle = 'Romain Royer';
 
         $postRepository = new PostRepository();
-        $posts = $postRepository->findAll();        // AJOUTER LIMIT 6 POSTS
+        $posts = $postRepository->findAll(6);        // AJOUTER LIMIT 6 POSTS
 
         $this->render('home.html.twig', [
             'headTitle' => $headTitle,
