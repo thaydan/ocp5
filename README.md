@@ -10,8 +10,8 @@ Optimised for SEO.
 5. Then connect the domain to the /public folder.
 
 ## First connexion
-Your login details are
-Identifiant : root
-Password : 1234
+Your login details are  
+Identifiant : root  
+Password : 1234  
 
 For more security, we recommend that you create a new account, with a different username and password, and then delete the default account.
