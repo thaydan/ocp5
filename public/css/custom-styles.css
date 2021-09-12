@@ -1,5 +1,5 @@
 .mce-content-body[data-mce-placeholder]:not(.mce-visualblocks)::before {
-    position: relative!important;
+    position: relative !important;
     width: max-content;
     -webkit-transform-origin-x: center;
 }
@@ -7,6 +7,7 @@
 .not-allowed {
     cursor: not-allowed;
 }
+
 .not-allowed * {
     pointer-events: none;
     opacity: 0.65;
@@ -59,6 +60,7 @@
 form.bigger .floating-label-form-group input, form.bigger .floating-label-form-group textarea {
     font-size: 1.5rem;
 }
+
 /* end form */
 
 /* file selector */
@@ -68,17 +70,21 @@ form.bigger .floating-label-form-group input, form.bigger .floating-label-form-g
     right: 10px;
     display: none;
 }
+
 .masthead.admin-header-displayed div.container:hover #featured-image-selector {
     display: block;
 }
+
 #featured-image-selector i {
     font-size: 42px;
     cursor: pointer;
     padding: 6px;
 }
+
 #featured-image-selector input {
     display: none;
 }
+
 /* end file selector */
 
 
@@ -86,6 +92,7 @@ form.bigger .floating-label-form-group input, form.bigger .floating-label-form-g
 #featured-image-container .content {
     z-index: 1;
 }
+
 #featured-image-container .filter {
     position: absolute;
     top: 0;
@@ -94,6 +101,7 @@ form.bigger .floating-label-form-group input, form.bigger .floating-label-form-g
     left: 0;
     background: #6161617a;
 }
+
 /* end featured-image-container */
 
 
@@ -103,35 +111,44 @@ form.bigger .floating-label-form-group input, form.bigger .floating-label-form-g
     padding: 10px;
     border-radius: 8px;
 }
+
 .comment.admin:hover {
     background: #f9f9f9;
 }
+
 /* end post page */
 
 /* edit post page */
-#form-edit-post{
+#form-edit-post {
     display: none;
 }
+
 /* end edit post page */
 
 /* post item */
-.post-item a{
+.post-item a {
     color: #117964;
 }
-.post-item a:hover{
+
+.post-item a:hover {
     text-decoration: inherit;
     color: #608cce;
 }
-.post-item .img-fluid{
+
+.post-item .img-fluid {
     border-radius: 8px;
 }
-.post-item .updated-date{
+
+.post-item .updated-date {
     color: #117964a6;
 }
-.post-item a:hover .updated-date{
+
+.post-item a:hover .updated-date {
     color: #114e79a6;
 }
+
 /* end post item */
+
 
 @media (max-width: 992px) {
     .masthead {
@@ -148,3 +165,8 @@ form.bigger .floating-label-form-group input, form.bigger .floating-label-form-g
     }
 }
 
+@media (min-width: 992px) {
+    .masthead .masthead-heading {
+        line-height: 4rem;
+    }
+}
