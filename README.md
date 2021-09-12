@@ -6,8 +6,9 @@ Optimised for SEO.
 ## Installation
 1. Download project files.
 2. Put the project the your serveur.
-2. In the root of the project, edit and fill the .env file (database, mail server, contact form destination, upload destination).
-5. Then connect the domain to the /public folder.
+3. Create new database and import the ocp5-structure-and-data.sql file.
+4. In the root of the project, edit and fill the .env file (database details, mail server, contact form destination, upload destination).
+5. Finally, connect the domain to the /public folder.
 
 ## First connexion
 Your login details are  
