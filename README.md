@@ -15,3 +15,6 @@ Identifiant : root
 Password : 1234  
 
 For more security, we recommend that you create a new account, with a different username and password, and then delete the default account.
+
+## Code quality
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/1bb5b51cc40143dcaa42b76b2b60ac52)](https://www.codacy.com/gh/thaydan/ocp5/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=thaydan/ocp5&amp;utm_campaign=Badge_Grade)
