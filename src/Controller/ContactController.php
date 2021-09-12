@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Core\Controller\AController;
+use Core\Form\Constraint\IsValidEmailConstraint;
 use Core\Form\Constraint\NotBlankConstraint;
 use Core\Form\Constraint\NotNullConstraint;
 use Core\Form\Form;
@@ -10,7 +11,6 @@ use Core\Form\Type\AFormType;
 use Core\Form\Type\SubmitType;
 use Core\Form\Type\TextAreaType;
 use Core\Form\Type\TextType;
-use mysql_xdevapi\Exception;
 use Swift_Mailer;
 use Swift_Message;
 use Swift_SmtpTransport;
@@ -114,7 +114,8 @@ class ContactController extends AController
                 'email' => new TextType(
                     [
                         new NotNullConstraint(),
-                        new NotBlankConstraint()
+                        new NotBlankConstraint(),
+                        new IsValidEmailConstraint()
                     ],
                     [
                         'label' => 'Adresse e-mail'

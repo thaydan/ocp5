@@ -6,6 +6,7 @@ use App\Repository\CommentRepository;
 use App\Repository\PostRepository;
 use App\Repository\UserRepository;
 use Core\Controller\AController;
+use Core\Form\Constraint\IsValidEmailConstraint;
 use Core\Form\Constraint\NotBlankConstraint;
 use Core\Form\Constraint\NotNullConstraint;
 use Core\Form\Form;
@@ -30,14 +31,13 @@ class PostController extends AController
         $post->author = (array)$userRepo->find($post->author_id, ['id', 'first_name']);
 
         $commentRepository = new CommentRepository();
-        if(Auth::isConnected()) {
+        if (Auth::isConnected()) {
             $comments = $commentRepository->findBy([
                 'id_post' => $post->id
             ],
                 'datetime DESC'
             );
-        }
-        else {
+        } else {
             $comments = $commentRepository->findBy([
                 'id_post' => $post->id,
                 'validated' => 1
@@ -46,7 +46,49 @@ class PostController extends AController
             );
         }
 
-        $formAddComment = new Form(
+        $formAddComment = $this->newFormAddComment();
+
+        $headTitle = $post->title . ' - Romain Royer';
+
+        $this->render('post.html.twig', [
+            'headTitle' => $headTitle,
+            'post' => $post,
+            'comments' => $comments,
+            'formAddComment' => $formAddComment
+        ]);
+    }
+
+    public function addComment($slug)
+    {
+        $formAddComment = $this->newFormAddComment();
+        $formAddComment->handleRequest();
+
+        if (!$formAddComment->isSubmitted() or !$formAddComment->isValid()) {
+            throw new \Exception('Les champs n\'ont pas été remplis correctement.');
+        }
+
+        $datas = $formAddComment->getData();
+        unset($datas['submit']);
+
+        $postRepository = new PostRepository();
+        $post = $postRepository->findOneBy(['slug' => $slug]);
+
+        $datas['id_post'] = $post->id;
+
+        $commentRepository = new CommentRepository();
+        $commentRepository->add($datas);
+
+        $headTitle = $post->title . ' - Romain Royer';
+
+        $this->render('add-comment-success.html.twig', [
+            'headTitle' => $headTitle,
+            'post_slug' => $slug
+        ]);
+    }
+
+    public function newFormAddComment()
+    {
+        return new Form(
             [
                 'author_name' => new TextType(
                     [
@@ -60,7 +102,8 @@ class PostController extends AController
                 'email' => new TextType(
                     [
                         new NotNullConstraint(),
-                        new NotBlankConstraint()
+                        new NotBlankConstraint(),
+                        new IsValidEmailConstraint()
                     ],
                     [
                         'label' => 'Adresse e-mail'
@@ -84,32 +127,6 @@ class PostController extends AController
             ]
         );
 
-        $headTitle = $post->title . ' - Romain Royer';
-
-        $this->render('post.html.twig', [
-            'headTitle' => $headTitle,
-            'post' => $post,
-            'comments' => $comments,
-            'formAddComment' => $formAddComment
-        ]);
-    }
-
-    public function addComment($slug)
-    {
-        $postRepository = new PostRepository();
-        $post = $postRepository->findOneBy(['slug' => $slug]);
-
-        $_POST['id_post'] = $post->id;
-
-        $commentRepository = new CommentRepository();
-        $commentRepository->add($_POST);
-
-        $headTitle = $post->title . ' - Romain Royer';
-
-        $this->render('add-comment-success.html.twig', [
-            'headTitle' => $headTitle,
-            'post_slug' => $slug
-        ]);
     }
 
 }
