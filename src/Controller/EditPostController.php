@@ -38,26 +38,26 @@ class EditPostController extends AController
             $_POST['updated_datetime'] = date("Y-m-d H:i:s");
             $_POST['author_id'] = Auth::getUser()->getID();
 
+            $post = $postRepository->findOneBy(['id' => $_POST['id']]);
+
             // check slug
             $_POST['slug'] = trim($_POST['slug']);
             if (!$_POST['slug']) {
                 $_POST['slug'] = $this->slugify($_POST['title']);
             }
-            $postsWithSameSlug = $postRepository->findBy(['slug' => $_POST['slug']]);
-            while ($postsWithSameSlug) {
+            $postsWithSameSlug = $postRepository->findOneBy(['slug' => $_POST['slug']]);
+            while ($postsWithSameSlug && $postsWithSameSlug->id != $_POST['id']) {
                 $_POST['slug'] .= '-1';
-                $postsWithSameSlug = $postRepository->findBy(['slug' => $_POST['slug']]);
+                $postsWithSameSlug = $postRepository->findOneBy(['slug' => $_POST['slug']]);
             }
 
-            $post = $postRepository->findOneBy(['id' => $_POST['id']]);
-
             // upload image
-            if($_FILES['featured-image']['size']) {
+            if ($_FILES['featured-image']['size']) {
                 $upload = new Upload();
                 $upload->setFile($_FILES['featured-image']);
                 $uploaded = $upload->run($_POST['slug']);
-                if($uploaded) {
-                    if($post) $upload->removeFile($post->featured_image); // if
+                if ($uploaded) {
+                    if ($post) $upload->removeFile($post->featured_image); // if
                     $_POST['featured_image'] = $upload->getTargetFile();
                 }
             }
@@ -93,10 +93,10 @@ class EditPostController extends AController
         $post = $postRepository->findOneBy(['slug' => $slug]);
 
         /* remove image file */
-        if($post->featured_image) {
+        if ($post->featured_image) {
             $upload = new Upload();
             $removed = $upload->removeFile($post->featured_image);
-            if(!$removed) {
+            if (!$removed) {
                 throw new \Exception("Une erreur est survenue lors de la suppression de l'image lié à cet article.<br>La suppression de l'article est annulée");
             }
         }
