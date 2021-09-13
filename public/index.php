@@ -29,7 +29,9 @@ $dotenv->load(...$envFiles);
 
 session_start();
 
-$_SESSION['last-route'] = $_SESSION['current-route'];
+if(isset($_SESSION['current-route'])) {
+    $_SESSION['last-route'] = $_SESSION['current-route'];
+}
 $_SESSION['current-route'] = $_GET['url'];
 
 $router = new Router($_GET['url']);
